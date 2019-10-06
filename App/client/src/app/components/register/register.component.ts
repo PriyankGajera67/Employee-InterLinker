@@ -54,7 +54,7 @@ export class RegisterComponent implements OnInit {
 
       this.loading = true;
       this.userService.registerUser(this.f.name.value, this.f.email.value, this.f.password.value, this.f.confirmPassword.value).subscribe((data) =>{
-        console.log("api done");
+        this.router.navigate(['/']);
       })
   }
 
