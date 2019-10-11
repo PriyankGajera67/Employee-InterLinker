@@ -6,7 +6,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
 
 import { fakeBackendProvider } from './_helpers';
 
@@ -39,7 +38,6 @@ import { AdminComponent } from './components/admin/admin.component';
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
     AgGridModule.withComponents([])
   ],
   providers: [
