@@ -6,6 +6,7 @@ const passport = require("passport");
 const users = require("./routes/api/users");
 var cors = require('cors');
 
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -21,9 +22,9 @@ app.use(bodyParser.json());
 
 // Create link to Angular build directory
 
-var distDir = __dirname + "/dist/";
-
-app.use(express.static(distDir));
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname + '/dist/index.html'));
+});
 
 // DB Config
 const db = require("./config/keys").mongoURI;
