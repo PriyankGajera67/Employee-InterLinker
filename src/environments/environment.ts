@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    apiUrl: 'http://employee-interlinker.herokuapp.com/api'
+    apiUrl: 'https://employee-interlinker.herokuapp.com/api'
 };
 
 /*

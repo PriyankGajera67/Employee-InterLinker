@@ -1,4 +1,4 @@
 export const environment = {
     production: true,
-    apiUrl: 'http://employee-interlinker.herokuapp.com/api'
+    apiUrl: 'https://employee-interlinker.herokuapp.com/api'
 };
