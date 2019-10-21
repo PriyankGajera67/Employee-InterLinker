@@ -53,7 +53,7 @@ const UserSchema = new Schema({
     default:false
   },
   avatar:{
-    type:Boolean,
+    type:String,
     default:'https://img.pngio.com/avatar-user-computer-icons-software-developer-avatar-png-png-computer-user-900_540.jpg'
   },
   dob:{
