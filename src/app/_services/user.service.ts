@@ -19,4 +19,9 @@ export class UserService {
         let role = 'REGULAR';
         return this.http.post<any>(`${environment.apiUrl}/users/register`, { name,email,password,confirmPassword,role });
     }
+    registerCompany(name: string,email: string, password: string, confirmPassword: string) {
+        let role = 'COMOANY';
+        return this.http.post<any>(`${environment.apiUrl}/users/register`, { name,email,password,confirmPassword,role });
+    }
+
 }
