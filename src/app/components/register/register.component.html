@@ -55,9 +55,9 @@
                 <h5 class="card-title text-center">Register As</h5>
                 <div style="text-align: center;margin-bottom: 25px;">
                     <div class="ui-group-buttons">
-                        <button type="button" class="btn btn-primary" (click)="onRegularUserSelect()">Regular User</button>
+                        <button type="button" class="btn btn-primary" [ngClass]="{'disabled': !isCompanyView}" (click)="onRegularUserSelect()">Regular User</button>
                         <div class="or"></div>
-                        <button type="button" class="button btn btn-success" (click)="onCompanySelect()">Company</button>
+                        <button type="button" class="button btn btn-success" [ngClass]="{'disabled': isCompanyView}" (click)="onCompanySelect()">Company</button>
                     </div>
                 </div>
                 <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()" *ngIf="!isCompanyView">

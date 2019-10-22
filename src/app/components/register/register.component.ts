@@ -15,7 +15,7 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
-  isCompanyView: boolean = true;
+  isCompanyView: boolean = false;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -80,7 +80,6 @@ export class RegisterComponent implements OnInit {
 
   onCompanySelect(){
     this.isCompanyView = true;   
-    console.log("fsadfas");
   }
 
 }
