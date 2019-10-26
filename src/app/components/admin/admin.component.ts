@@ -24,7 +24,7 @@ export class AdminComponent implements OnInit {
 
   displayedUserColumns: string[] = ["avatar", "date", "email", "name","gender", "Full-time/Part-time", "verified",];
 
-  dataSource = new MatTableDataSource(this.dataVarCompanies);
+  dataSource = [];
   dataSourceUsers = []
 
   title = 'app';
@@ -39,13 +39,13 @@ export class AdminComponent implements OnInit {
       this.setDataCompany(data);
     })
     this.isLoading = false;
-    this.dataSource.paginator = this.paginator;
+    //this.dataSource.paginator = this.paginator;
 
   }
 
 
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    //this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   setDataCompany(data: any) {
