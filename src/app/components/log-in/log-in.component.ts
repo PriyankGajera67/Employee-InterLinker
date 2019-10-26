@@ -56,7 +56,12 @@ export class LogInComponent implements OnInit {
           .pipe(first())
           .subscribe(
               data => {
-                  this.router.navigate([this.returnUrl]);
+                  debugger;
+                  if(data.role === 'ADMIN'){
+                    this.router.navigate(['/admin']);
+                  } else{
+                    this.router.navigate([this.returnUrl]);
+                  }
               },
               error => {
                   this.error = error;
