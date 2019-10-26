@@ -107,10 +107,23 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/all", (req, res) => {
+router.post("/all", (req, res) => {
   User.find((err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
+  });
+});
+
+router.post("/verify", (req, res) => {
+  User.findOne({ email: req.body.email }).then(user => {
+    if (user) {
+      User.updateOne({ email: req.body.email },{"verified":true},(err) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true });
+      });
+    } else {
+      return res.status(400).json({ email: "Opps Something went wrong!!" });
+    }
   });
 });
 

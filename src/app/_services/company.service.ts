@@ -14,7 +14,10 @@ export class UserService {
         return this.http.get<User[]>(`${environment.apiUrl}/users`);
     }
 
-   
+    verifyCompany(email:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/verify`, { email });
+    }
+
     registerUser(name: string,email: string, password: string, confirmPassword: string) {
         let role = 'COMPANY';
         return this.http.post<any>(`${environment.apiUrl}/users/register`, { name,email,password,confirmPassword,role });
