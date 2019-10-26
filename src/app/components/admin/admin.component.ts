@@ -1,32 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef,ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/_services';
-
-export interface PeriodicElement {
-  avatar: string;
-  date: string;
-  email: string;
-  //fullTime: boolean;
-  //gender: string;
-  name: string;
-  numbersOfEmployees: number;
-  //partTime: boolean;
-  verified: boolean;
-  webSite: string;
-}
-
-// const ELEMENT_DATA: PeriodicElement[] = [
-//   {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-//   {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-//   {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-//   {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-//   {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-//   {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-//   {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-//   {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-//   {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-//   {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-// ];
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table'
 
 @Component({
   selector: 'app-admin',
@@ -36,36 +12,26 @@ export interface PeriodicElement {
 export class AdminComponent implements OnInit {
 
   isLoading = false;
+  isCompanyView = true;
   totalCompanies = 0;
   totalUSers = 0;
   totalVerifiedUsers = 0;
   totalVerifiedCompanies = 0;
+  dataVarCompanies = [];
+  dataVarUsers = [];
 
   displayedColumns: string[] = ["avatar", "date", "email", "name", "numbersOfEmployees", "webSite", "verified"];
 
-  // displayedColumns: string[] = ["avatar",
-  // "date", "email", "fullTime", "gender",
-  // "name",
-  // "numbersOfEmployees",
-  // "partTime",
-  // "verified",
-  // "webSite"];
-  public companyData: PeriodicElement[] = [
-    {
-      avatar: "",
-      date: "",
-      email: "",
-      name: "",
-      numbersOfEmployees: 0,
-      verified: false,
-      webSite: ""
-    }
-  ];
-  dataSource = [];
+  displayedUserColumns: string[] = ["avatar", "date", "email", "name","gender", "Full-time/Part-time", "verified",];
+
+  dataSource = new MatTableDataSource(this.dataVarCompanies);
+  dataSourceUsers = []
 
   title = 'app';
 
   constructor(private http: HttpClient, private userService: UserService, private ref: ChangeDetectorRef) { }
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   ngOnInit() {
     this.isLoading = true;
@@ -73,12 +39,18 @@ export class AdminComponent implements OnInit {
       this.setDataCompany(data);
     })
     this.isLoading = false;
+    this.dataSource.paginator = this.paginator;
+
   }
 
 
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   setDataCompany(data: any) {
-    let dataVarCompanies = [];
-    let dataVarUsers = [];
+    this.dataVarCompanies = [];
+    this.dataVarUsers = [];
     this.totalVerifiedCompanies = 0;
     this.totalVerifiedUsers = 0;
     data.data.forEach(element => {
@@ -86,7 +58,7 @@ export class AdminComponent implements OnInit {
         if(element.verified){
           this.totalVerifiedCompanies += 1;
         }
-        dataVarCompanies.push({
+        this.dataVarCompanies.push({
           avatar: element.avatar,
           date: element.date,
           email: element.email,
@@ -101,24 +73,31 @@ export class AdminComponent implements OnInit {
         if(element.verified){
           this.totalVerifiedUsers += 1;
         }
-        dataVarUsers.push({
+        this.dataVarUsers.push({
           avatar: element.avatar,
           date: element.date,
           email: element.email,
           fullTime: element.fullTime,
           gender: element.gender,
           name: element.name,
-          numbersOfEmployees: element.numbersOfEmployees,
           partTime: element.partTime,
           verified: element.verified,
-          webSite: element.webSite
         });
       }
     
     });
-    this.totalCompanies = dataVarCompanies.length;
-    this.totalUSers = dataVarUsers.length;
-    this.dataSource = dataVarCompanies;
+    this.totalCompanies =this. dataVarCompanies.length;
+    this.totalUSers = this.dataVarUsers.length;
+    this.dataSource = this.dataVarCompanies;
+    this.dataSourceUsers = this.dataVarUsers;
+  }
+
+  onUserView(){
+    this.isCompanyView=false;
+  }
+
+  onCompanyView(){
+    this.isCompanyView=true;
   }
 
   onVerifyCompany(email){
