@@ -87,6 +87,7 @@
                     </div>
                     <hr />
                     <h6>Companies</h6>
+                    <hr />
 
                     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -95,7 +96,7 @@
 
                         <!-- Position Column -->
                         <ng-container matColumnDef="avatar">
-                            <th mat-header-cell *matHeaderCellDef> Avatar </th>
+                            <th mat-header-cell *matHeaderCellDef> Logo </th>
                             <td mat-cell *matCellDef="let element"> 
                                     <img height="50" width="50" src="https://png2.cleanpng.com/sh/e0d06e8884d3b6ce409dd71188c185dc/L0KzQYm3U8I1N5V0fZH0aYP2gLBuTfdwd5hxfZ91b3fyPbi0kCVqfJYyf9H4Z3zoPYbogsZnOZRrSKtuMECzPoS5VsEyQWU5Sac7MUm2SImCVcA1OGYziNDw/kisspng-google-logo-g-suite-google-5ab6f1cf09e000.3261194415219388950405.png" alt="company-profile0pic" class="rounded-circle rounded-sm">
                                      </td>
@@ -139,18 +140,30 @@
                             <td mat-cell *matCellDef="let element"> {{element.partTime}} </td>
                         </ng-container> -->
 
+                        <ng-container matColumnDef="webSite">
+                                <th mat-header-cell *matHeaderCellDef> webSite </th>
+                                <td mat-cell *matCellDef="let element">
+                                        <i class="material-icons">
+                                                link
+                                                </i>&nbsp;<a href={{element.webSite}} target="_blank">{{element.webSite}}</a>
+                                </td>
+                        </ng-container>
+
                         <ng-container matColumnDef="verified">
                             <th mat-header-cell *matHeaderCellDef> verified </th>
                             <td mat-cell *matCellDef="let element">
                                 <button *ngIf="!element.verified" class="btn btn-success" (click)="onVerifyCompany(element.email)">Verify Now</button>    
-                                <button *ngIf="element.verified" class="btn btn-success disabled">Verified</button>    
+                                <button *ngIf="element.verified" class="btn btn-success disabled">Verified</button>  
+                                &nbsp;&nbsp;
+                                <button class="btn btn-danger" (click)="onDeleteCompany(element.email)">
+                                                        <i class="material-icons">
+                                                                delete_forever
+                                                                </i>
+                                </button>  
                             </td>
                         </ng-container>
 
-                        <ng-container matColumnDef="webSite">
-                            <th mat-header-cell *matHeaderCellDef> webSite </th>
-                            <td mat-cell *matCellDef="let element"> {{element.webSite}} </td>
-                        </ng-container>
+                       
 
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

@@ -16,6 +16,15 @@ export class UserService {
     verifyCompany(email:string){
         return this.http.post<any>(`${environment.apiUrl}/users/verify`, { email });
     }
+    verifyUser(email:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/verify`, { email });
+    }
+    deleteCompany(email:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/delete`, { email });
+    }
+    deleteUser(email:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/delete`, { email });
+    }
     registerUser(name: string,email: string, password: string, confirmPassword: string) {
         let role = 'REGULAR';
         return this.http.post<any>(`${environment.apiUrl}/users/register`, { name,email,password,confirmPassword,role });

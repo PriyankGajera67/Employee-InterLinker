@@ -41,7 +41,7 @@ export class AdminComponent implements OnInit {
   totalVerifiedUsers = 0;
   totalVerifiedCompanies = 0;
 
-  displayedColumns: string[] = ["avatar", "date", "email", "name", "numbersOfEmployees", "verified", "webSite"];
+  displayedColumns: string[] = ["avatar", "date", "email", "name", "numbersOfEmployees", "webSite", "verified"];
 
   // displayedColumns: string[] = ["avatar",
   // "date", "email", "fullTime", "gender",
@@ -123,6 +123,14 @@ export class AdminComponent implements OnInit {
 
   onVerifyCompany(email){
     this.userService.verifyCompany(email).subscribe(data =>{
+      this.userService.getAll().subscribe(data =>{
+        this.setDataCompany(data);
+      })
+    })
+  }
+
+  onDeleteCompany(email){
+    this.userService.deleteCompany(email).subscribe(data =>{
       this.userService.getAll().subscribe(data =>{
         this.setDataCompany(data);
       })

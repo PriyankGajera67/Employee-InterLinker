@@ -127,4 +127,11 @@ router.post("/verify", (req, res) => {
   });
 });
 
+router.post("/delete", (req, res) => {
+  User.remove({ email: req.body.email },(err) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true });
+      });
+});
+
 module.exports = router;
