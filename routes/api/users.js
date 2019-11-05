@@ -96,6 +96,7 @@ router.post("/login", (req, res) => {
               success: true,
               token: "Bearer " + token,
               role:user.role,
+              id:user._id,
             });
           }
         );
@@ -125,6 +126,14 @@ router.post("/verify", (req, res) => {
     } else {
       return res.status(400).json({ email: "Opps Something went wrong!!" });
     }
+  });
+});
+
+
+router.post("/getUser", (req, res) => {
+  User.findById(req.body.id,(err, user) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: user });
   });
 });
 

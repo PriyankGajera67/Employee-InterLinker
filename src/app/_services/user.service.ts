@@ -33,5 +33,12 @@ export class UserService {
         let role = 'COMPANY';
         return this.http.post<any>(`${environment.apiUrl}/users/register`, { name,email,password,confirmPassword,role });
     }
-
+    getCurrentUser() {
+        let currentUSer = JSON.parse(localStorage.getItem('currentUser'));
+        let id = currentUSer.id;
+        return this.http.post<any>(`${environment.apiUrl}/users/getUser`, { id });
+    }
+    getUser(id:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/getUser`, { id });
+    }
 }
