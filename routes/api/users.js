@@ -129,6 +129,12 @@ router.post("/verify", (req, res) => {
   });
 });
 
+router.post("/allCompany", (req, res) => {
+  User.find({role: "COMPANY"},(err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+}); 
 
 router.post("/getUser", (req, res) => {
   User.findById(req.body.id,(err, user) => {
