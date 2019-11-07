@@ -15,6 +15,7 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   error = '';
+  isCompanyView: boolean = false;
 
   constructor(
       private formBuilder: FormBuilder,
@@ -58,5 +59,27 @@ export class RegisterComponent implements OnInit {
       })
   }
 
+
+  onCorpSubmit(){
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.registerForm.invalid) {
+        return;
+    }
+
+    this.loading = true;
+    this.userService.registerCompany(this.f.name.value, this.f.email.value, this.f.password.value, this.f.confirmPassword.value).subscribe((data) =>{
+      this.router.navigate(['/']);
+    })
+  }
+
+  onRegularUserSelect(){
+    this.isCompanyView = false;   
+  }
+
+  onCompanySelect(){
+    this.isCompanyView = true;   
+  }
 
 }

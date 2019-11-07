@@ -1,0 +1,67 @@
+.form-control-borderless {
+    border: none;
+}
+
+.form-control-borderless:hover, .form-control-borderless:active, .form-control-borderless:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+}
+
+.material-icon{
+    vertical-align: middle;
+}
+
+
+.searchbar{
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 60px;
+    background-color: #fff;
+    border-radius: 30px;
+    padding: 10px;
+    width:600px;
+    }
+
+    .search_input{
+    color: #777;;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 500px;
+    margin-left: 15px;
+    padding-top: 0px;
+    caret-color:transparent;
+    line-height: 40px;
+    transition: width 0.4s linear;
+    }
+
+     .search_icon{
+    background: linear-gradient(to right, #0062E6, #33AEFF);;
+    color: #fff;
+    }
+
+    .search_icon{
+    height: 40px;
+    width: 40px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color:white;
+    }
+        .row-section h2{float:left; width:100%; color:#fff; margin-bottom:30px; font-size: 14px;}
+        .row-section h2 span{font-family: 'Libre Baskerville', serif; display:block; font-size:45px; text-transform:none; margin-bottom:20px; margin-top:30px;font-weight:700;}
+        .row-section h2 a{color:#d2abce;}
+        .row-section .row-block{ padding:20px; margin-bottom:50px;}
+        .row-section .row-block ul{margin:0; padding:0;}
+        .row-section .row-block ul li{list-style:none; margin-bottom:20px;}
+        .row-section .row-block ul li:last-child{margin-bottom:0;}
+        .row-section .row-block ul li:hover{cursor:grabbing;}
+        .row-section .row-block .media{border:1px solid #d5dbdd; padding:5px 20px; border-radius: 5px; box-shadow:0px 2px 1px rgba(0,0,0,0.04); background:#fff;}
+        .row-section .media .media-left img{width:75px;}
+        .row-section .media .media-body p{padding: 0 15px; font-size:14px;}
+        .row-section .media .media-body h4 {color: #007bff; font-size: 18px; font-weight: 600; margin-bottom: 0; padding-left: 14px; margin-top:12px;}
+        .btn-default{background:#007bff; color:#fff; border-radius:30px; border:none; font-size:16px;}
+        

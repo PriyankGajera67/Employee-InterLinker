@@ -94,7 +94,9 @@ router.post("/login", (req, res) => {
           (err, token) => {
             res.json({
               success: true,
-              token: "Bearer " + token
+              token: "Bearer " + token,
+              role:user.role,
+              id:user._id,
             });
           }
         );
@@ -105,6 +107,47 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+router.post("/all", (req, res) => {
+  User.find((err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
+router.post("/verify", (req, res) => {
+  User.findOne({ email: req.body.email }).then(user => {
+    if (user) {
+      User.updateOne({ email: req.body.email },{"verified":true},(err) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true });
+      });
+    } else {
+      return res.status(400).json({ email: "Opps Something went wrong!!" });
+    }
+  });
+});
+
+router.post("/allCompany", (req, res) => {
+  User.find({role: "COMPANY"},(err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+}); 
+
+router.post("/getUser", (req, res) => {
+  User.findById(req.body.id,(err, user) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: user });
+  });
+});
+
+router.post("/delete", (req, res) => {
+  User.deleteOne({ email: req.body.email },(err) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true });
+      });
 });
 
 module.exports = router;
