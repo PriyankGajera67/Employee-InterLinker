@@ -154,33 +154,10 @@ router.post("/updateUser", (req, res) => {
   data = req.body.profileData;
   console.log(data);
  
-  User.findOneAndUpdate({ email: req.body.email }, data, {upsert:true}, function(err, doc){
+  User.findOneAndUpdate({ email: req.body.profileData.email }, data, {upsert:true}, function(err, doc){
     if (err) return res.send(500, { error: err });
-    return res.send("succesfully saved");
+    return res.json({ success: true });
   });
-  // User.findOne({ email: data.email }).then(user => {
-  //   if (user) {
-  //     User.updateOne({ email: req.body.email }, {
-  //       "email": req.body.profileData.email,
-  //       "dob": req.body.profileData.dob,
-  //       "name": req.body.profileData.name,
-  //       "address":req.body.profileData.address,
-  //       "postalCode": req.body.profileData.postalCode,
-  //       "country": req.body.profileData.country,
-  //       "city": req.body.profileData.city,
-  //       "joiningDate": req.body.profileData.joiningDate,
-  //       "gender": req.body.profileData.gender,
-  //       "employer": req.body.profileData.employer,
-  //       "contactNumber": req.body.profileData.contactNumber,
-  //       "fullTime": req.body.profileData.fullTime
-  //     }, (err) => {
-  //       if (err) return res.json({ success: false, error: err });
-  //       return res.json({ success: true });
-  //     });
-  //   } else {
-  //     return res.status(400).json({ email: "Opps Something went wrong!!" });
-  //   }
-  // });
 });
 
 module.exports = router;

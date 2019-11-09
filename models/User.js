@@ -90,6 +90,11 @@ const UserSchema = new Schema({
     type:String,
     default:"",
     required:false
+  },
+  position:{
+    type:String,
+    default:"",
+    required:false
   }
 });
 
