@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/app/_services/user.service';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { CompanyService } from 'src/app/_services/company.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,13 +10,107 @@ import { UserService } from 'src/app/_services/user.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,private companyService:CompanyService,private formBuilder: FormBuilder) { }
   isCompany: false;
   currentUser : any;
+  userDetailForm: FormGroup;
+  submitted = false;
+  companies= [];
   ngOnInit() {
     this.userService.getCurrentUser().subscribe(res =>{
-      this.currentUser = res;
-    })
+      this.SET_USER_DATA(res);
+    });
+    this.companyService.getAllCompanies().subscribe(res =>{
+      this.SET_COMPANIES_DATA(res);
+    });
+    
+    this.userDetailForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      dob:['', Validators.required],
+      name:['', Validators.required],
+      address:[''],
+      postalCode:[''],
+      country:[''],
+      city:[''],
+      joiningDate:[''],
+      gender:[''],
+      employer:[''],
+      contactNumber:['', Validators.required],
+      fullTime:[''],
+  });
   }
+
+    // convenience getter for easy access to form fields
+    get f() { return this.userDetailForm.controls; }
+
+    onSubmit() {
+        this.submitted = true;
+  
+        // stop here if form is invalid
+        if (this.userDetailForm.invalid) {
+            return;
+        }
+  
+        // display form values on success
+        console.log(this.userDetailForm.value, null, 4);
+
+        this.userService.updateUser(this.userDetailForm.value).subscribe(res =>{
+          this.userService.getCurrentUser().subscribe(res =>{
+            this.SET_USER_DATA(res);
+          });
+        });
+    }
+  
+    onReset() {
+        this.submitted = false;
+        this.userDetailForm.reset();
+    }
+
+    SET_USER_DATA(res){
+      console.log(res);
+      this.userDetailForm.get('name').setValue(res.data.name);
+      this.userDetailForm.get('email').setValue(res.data.email);
+      if(res.data.dob != undefined){
+        this.userDetailForm.get('dob').setValue(res.data.dob);
+      }
+      if(res.data.address != undefined){
+        this.userDetailForm.get('address').setValue(res.data.address);
+      }
+      if(res.data.postalCode != undefined){
+        this.userDetailForm.get('postalCode').setValue(res.data.postalCode);
+      }
+      if(res.data.country != undefined){
+        this.userDetailForm.get('country').setValue(res.data.country);
+      }
+      if(res.data.city != undefined){
+        this.userDetailForm.get('city').setValue(res.data.city);
+      }
+      if(res.data.joiningDate != undefined){
+        this.userDetailForm.get('joiningDate').setValue(res.data.joiningDate);
+      }
+      if(res.data.gender != undefined){
+        this.userDetailForm.get('gender').setValue(res.data.gender);
+      }
+      if(res.data.employer != undefined){
+        this.userDetailForm.get('employer').setValue(res.data.employer);
+      }
+      if(res.data.contactNumber != undefined){
+        this.userDetailForm.get('contactNumber').setValue(res.data.contactNumber);
+      }
+      if(res.data.fullTime != undefined){
+        this.userDetailForm.get('fullTime').setValue(res.data.fullTime);
+      }
+    }
+
+    SET_COMPANIES_DATA(res){
+      let companiesList = [];
+      res.data.forEach(element => {
+        companiesList.push({"name":element.name,"value":element._id});
+      });
+
+      this.companies = companiesList;
+      console.log(this.companies)
+    }
+
 
 }

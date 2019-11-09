@@ -25,6 +25,7 @@ const UserSchema = new Schema({
   },
   employer:{
     type:String,
+    default:"",
     required:false
   },
   fullTime:{
@@ -45,7 +46,7 @@ const UserSchema = new Schema({
   },
   contactNumber:{
     type:String,
-    Default:'9999999999',
+    default:'9999999999',
     maxlength:10
   },
   verified:{
@@ -58,6 +59,7 @@ const UserSchema = new Schema({
   },
   dob:{
     type:String,
+    default:"",
     required:false
   },
   numbersOfEmployees:{
@@ -66,22 +68,27 @@ const UserSchema = new Schema({
   },
   joiningDate:{
     type:String,
+    default:"",
     required:false
   },
   address:{
     type:String,
+    default:"",
     required:false
   },
   postalCode:{
     type:String,
+    default:"",
     required: false
   },
   city:{
     type:String,
+    default:"",
     required:false
   },
   country:{
     type:String,
+    default:"",
     required:false
   }
 });

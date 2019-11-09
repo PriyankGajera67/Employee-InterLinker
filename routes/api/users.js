@@ -95,8 +95,8 @@ router.post("/login", (req, res) => {
             res.json({
               success: true,
               token: "Bearer " + token,
-              role:user.role,
-              id:user._id,
+              role: user.role,
+              id: user._id,
             });
           }
         );
@@ -119,7 +119,7 @@ router.post("/all", (req, res) => {
 router.post("/verify", (req, res) => {
   User.findOne({ email: req.body.email }).then(user => {
     if (user) {
-      User.updateOne({ email: req.body.email },{"verified":true},(err) => {
+      User.updateOne({ email: req.body.email }, { "verified": true }, (err) => {
         if (err) return res.json({ success: false, error: err });
         return res.json({ success: true });
       });
@@ -130,24 +130,57 @@ router.post("/verify", (req, res) => {
 });
 
 router.post("/allCompany", (req, res) => {
-  User.find({role: "COMPANY"},(err, data) => {
+  User.find({ role: "COMPANY" }, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
-}); 
+});
 
 router.post("/getUser", (req, res) => {
-  User.findById(req.body.id,(err, user) => {
+  User.findById(req.body.id, (err, user) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: user });
   });
 });
 
 router.post("/delete", (req, res) => {
-  User.deleteOne({ email: req.body.email },(err) => {
-        if (err) return res.json({ success: false, error: err });
-        return res.json({ success: true });
-      });
+  User.deleteOne({ email: req.body.email }, (err) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true });
+  });
+});
+
+router.post("/updateUser", (req, res) => {
+  data = req.body.profileData;
+  console.log(data);
+ 
+  User.findOneAndUpdate({ email: req.body.email }, data, {upsert:true}, function(err, doc){
+    if (err) return res.send(500, { error: err });
+    return res.send("succesfully saved");
+  });
+  // User.findOne({ email: data.email }).then(user => {
+  //   if (user) {
+  //     User.updateOne({ email: req.body.email }, {
+  //       "email": req.body.profileData.email,
+  //       "dob": req.body.profileData.dob,
+  //       "name": req.body.profileData.name,
+  //       "address":req.body.profileData.address,
+  //       "postalCode": req.body.profileData.postalCode,
+  //       "country": req.body.profileData.country,
+  //       "city": req.body.profileData.city,
+  //       "joiningDate": req.body.profileData.joiningDate,
+  //       "gender": req.body.profileData.gender,
+  //       "employer": req.body.profileData.employer,
+  //       "contactNumber": req.body.profileData.contactNumber,
+  //       "fullTime": req.body.profileData.fullTime
+  //     }, (err) => {
+  //       if (err) return res.json({ success: false, error: err });
+  //       return res.json({ success: true });
+  //     });
+  //   } else {
+  //     return res.status(400).json({ email: "Opps Something went wrong!!" });
+  //   }
+  // });
 });
 
 module.exports = router;
