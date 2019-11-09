@@ -11,6 +11,7 @@ const validateLoginInput = require("../../validation/login");
 
 // Load User model
 const User = require("../../models/User");
+const Verification = require("../../models/Verification");
 
 // @route POST api/users/register
 // @desc Register user
@@ -152,11 +153,21 @@ router.post("/delete", (req, res) => {
 
 router.post("/updateUser", (req, res) => {
   data = req.body.profileData;
-  console.log(data);
- 
-  User.findOneAndUpdate({ email: req.body.profileData.email }, data, {upsert:true}, function(err, doc){
-    if (err) return res.send(500, { error: err });
-    return res.json({ success: true });
+  User.findOne({ email: data.email }).then(user => {
+    if (user) {
+      User.updateOne({ email: req.body.profileData.email }, {data}, (err) => {
+        if (err) return res.json({ success: false, error: err });
+          const varification = new Verification({
+            userId: user._id,
+            companyId: data.employer,
+          });
+          varification.save().then(vari => res.json(vari))
+          .catch(err => console.log(err));
+        return res.json({ success: true });
+      });
+    } else {
+      return res.status(400).json({ email: "Opps Something went wrong!!" });
+    }
   });
 });
 
