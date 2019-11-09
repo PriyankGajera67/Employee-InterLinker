@@ -21,6 +21,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { CompanyHomeComponent } from './components/company/company-home/company-home.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
     RegisterComponent,
     HomeComponent,
     AdminComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    CompanyHomeComponent
   ],
   imports: [
     BrowserModule,

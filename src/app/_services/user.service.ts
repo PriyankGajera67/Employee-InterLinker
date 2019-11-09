@@ -41,4 +41,7 @@ export class UserService {
     getUser(id:string){
         return this.http.post<any>(`${environment.apiUrl}/users/getUser`, { id });
     }
+    updateUser(profileData) {
+        return this.http.post<any>(`${environment.apiUrl}/users/updateUser`, { profileData });
+    }
 }
