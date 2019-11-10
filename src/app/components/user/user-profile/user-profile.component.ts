@@ -15,8 +15,10 @@ export class UserProfileComponent implements OnInit {
   currentUser : any;
   userDetailForm: FormGroup;
   submitted = false;
+  inProgress = false;
   companies= [];
   ngOnInit() {
+    this.inProgress = true;
     this.userService.getCurrentUser().subscribe(res =>{
       this.SET_USER_DATA(res);
     });
@@ -37,6 +39,7 @@ export class UserProfileComponent implements OnInit {
       employer:[''],
       contactNumber:['', Validators.required],
       fullTime:[''],
+      position:['']
   });
   }
 
@@ -45,6 +48,7 @@ export class UserProfileComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
+        this.inProgress = true;
   
         // stop here if form is invalid
         if (this.userDetailForm.invalid) {
@@ -68,6 +72,7 @@ export class UserProfileComponent implements OnInit {
 
     SET_USER_DATA(res){
       console.log(res);
+      this.currentUser = res.data;
       this.userDetailForm.get('name').setValue(res.data.name);
       this.userDetailForm.get('email').setValue(res.data.email);
       if(res.data.dob != undefined){
@@ -100,6 +105,10 @@ export class UserProfileComponent implements OnInit {
       if(res.data.fullTime != undefined){
         this.userDetailForm.get('fullTime').setValue(res.data.fullTime);
       }
+      if(res.data.position != undefined){
+        this.userDetailForm.get('position').setValue(res.data.position);
+      }
+      this.inProgress = false;
     }
 
     SET_COMPANIES_DATA(res){

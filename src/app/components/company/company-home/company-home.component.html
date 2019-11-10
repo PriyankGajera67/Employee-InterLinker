@@ -1,1 +1,28 @@
-<p>company-home works!</p>
+      <div class="container" style="margin-top:40px;">
+            <div class="card" style="width:100%">
+                    <div class="card-body">
+                      <h5 class="card-title">Verification Requests</h5>
+                      <table class="table table-bordered">
+                            <thead>
+                              <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Position</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let c of verificationRequests">
+                                <th scope="row">1</th>
+                                <td>{{c.name}}</td>
+                                <td>{{c.position}}</td>
+                                <td>
+                                        <button class="btn btn-success"
+                                        (click)="onVerifyUser(c.email)">Verify Now</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                    </div>
+                  </div>
+      </div>
