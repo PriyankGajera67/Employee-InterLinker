@@ -154,21 +154,29 @@ router.post("/delete", (req, res) => {
 router.post("/updateUser", (req, res) => {
   data = req.body.profileData;
   User.findOne({ email: data.email }).then(user => {
-    if (user) {
-      User.updateOne({ email: req.body.profileData.email }, {data}, (err) => {
-        if (err) return res.json({ success: false, error: err });
-          const varification = new Verification({
-            userId: user._id,
-            companyId: data.employer,
-          });
-          varification.save().then(vari => res.json(vari))
-          .catch(err => console.log(err));
-        return res.json({ success: true });
-      });
-    } else {
-      return res.status(400).json({ email: "Opps Something went wrong!!" });
-    }
-  });
+      if (user) {
+        User.updateOne({ email: req.body.profileData.email }, {
+          "email": req.body.profileData.email,
+          "dob": req.body.profileData.dob,
+          "name": req.body.profileData.name,
+          "address":req.body.profileData.address,
+          "postalCode": req.body.profileData.postalCode,
+          "country": req.body.profileData.country,
+          "city": req.body.profileData.city,
+          "joiningDate": req.body.profileData.joiningDate,
+          "gender": req.body.profileData.gender,
+          "employer": req.body.profileData.employer,
+          "contactNumber": req.body.profileData.contactNumber,
+          "fullTime": req.body.profileData.fullTime,
+          "position":req.body.profileData.position
+        }, (err) => {
+          if (err) return res.json({ success: false, error: err });
+          return res.json({ success: true });
+        });
+      } else {
+        return res.status(400).json({ email: "Opps Something went wrong!!" });
+      }
+    });
 });
 
 module.exports = router;

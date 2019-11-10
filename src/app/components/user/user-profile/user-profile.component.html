@@ -1,3 +1,6 @@
+<div class="loader-div" *ngIf="inProgress">
+    <div class="loader"></div>
+</div>
 <div class="container emp-profile">
     <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()">
         <div class="row">
