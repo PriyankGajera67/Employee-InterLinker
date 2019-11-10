@@ -2,6 +2,9 @@
     <div class="loader"></div>
 </div>
 <div class="container emp-profile">
+        <div class="alert alert-warning" role="alert" *ngIf="!currentUser?.verified && currentUser?.employer !== ''">
+                Your profile is not verified Yet by your current employer
+            </div>
     <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col-md-4">

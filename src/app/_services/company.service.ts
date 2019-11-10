@@ -12,4 +12,8 @@ export class CompanyService {
     getAllCompanies(){
         return this.http.post<any>(`${environment.apiUrl}/users/allCompany`,{});
     }
+
+    getVerificationRequest(employer:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/getVerificationRequests`,{employer});
+    }
 }

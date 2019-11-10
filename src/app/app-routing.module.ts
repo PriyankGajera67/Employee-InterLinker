@@ -7,13 +7,17 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { CompanyHomeComponent } from './components/company/company-home/company-home.component';
+import { AdminGuard } from './_helpers/admin.guard';
+import { CompanyGuard } from './_helpers/company.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LogInComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard,AdminGuard]},
+  { path: 'company-home', component: CompanyHomeComponent, canActivate: [AuthGuard,CompanyGuard]},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

@@ -179,4 +179,12 @@ router.post("/updateUser", (req, res) => {
     });
 });
 
+router.post("/getVerificationRequests", (req, res) => {
+  data = req.body;
+  User.find({ employer: data.employer }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
 module.exports = router;
