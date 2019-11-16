@@ -358,10 +358,10 @@
                             </div>
                             <div class="col-md-6">
                                 <mat-form-field>
-                                    <input matInput [matDatepicker]="pickerdob" formControlName="dob"
+                                    <input matInput [matDatepicker]="pickerdob1" formControlName="dob"
                                         placeholder="Choose a date">
-                                    <mat-datepicker-toggle matSuffix [for]="pickerdob"></mat-datepicker-toggle>
-                                    <mat-datepicker #pickerdob></mat-datepicker>
+                                    <mat-datepicker-toggle matSuffix [for]="pickerdob1"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerdob1></mat-datepicker>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -371,10 +371,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" formControlName="website" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.website.errors }" />
-                                    <div *ngIf="submitted && f.website.errors" class="invalid-feedback">
-                                        <div *ngIf="f.website.error.required">Website is required</div>
+                                    <input type="text" formControlName="webSite" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.webSite.errors }" />
+                                    <div *ngIf="submitted && f.webSite.errors" class="invalid-feedback">
+                                        <div *ngIf="f.webSite.error.required">Website is required</div>
                                     </div>
                                 </div>
                             </div>

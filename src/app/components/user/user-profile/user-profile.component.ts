@@ -11,7 +11,7 @@ import { CompanyService } from 'src/app/_services/company.service';
 export class UserProfileComponent implements OnInit {
 
   constructor(private userService: UserService,private companyService:CompanyService,private formBuilder: FormBuilder) { }
-  isCompany: true;
+  isCompany = false;
   currentUser : any;
   userDetailForm: FormGroup;
   companyDetailForm: FormGroup;
@@ -20,6 +20,7 @@ export class UserProfileComponent implements OnInit {
   companies= [];
   ngOnInit() {
     this.inProgress = true;
+    this.isCompany = JSON.parse(localStorage.getItem('currentUser')).role;
     this.userService.getCurrentUser().subscribe(res =>{
       this.SET_USER_DATA(res);
     });
@@ -51,7 +52,7 @@ export class UserProfileComponent implements OnInit {
         postalCode:[''],
         country:[''],
         city:[''],
-        website:[''],
+        webSite:[''],
         bio:[''],
         contactNumber:['', Validators.required],
     });
@@ -71,12 +72,20 @@ export class UserProfileComponent implements OnInit {
   
         // display form values on success
         console.log(this.userDetailForm.value, null, 4);
-
-        this.userService.updateUser(this.userDetailForm.value).subscribe(res =>{
-          this.userService.getCurrentUser().subscribe(res =>{
-            this.SET_USER_DATA(res);
+        if(this.isCompany){
+          this.userService.updateUser(this.companyDetailForm.value).subscribe(res =>{
+            this.userService.getCurrentUser().subscribe(res =>{
+              this.SET_USER_DATA(res);
+            });
           });
-        });
+        } else {
+          this.userService.updateUser(this.userDetailForm.value).subscribe(res =>{
+            this.userService.getCurrentUser().subscribe(res =>{
+              this.SET_USER_DATA(res);
+            });
+          });
+        }
+      
     }
   
     onReset() {
@@ -108,11 +117,11 @@ export class UserProfileComponent implements OnInit {
         if(res.data.contactNumber != undefined){
           this.companyDetailForm.get('contactNumber').setValue(res.data.contactNumber);
         }
-        if(res.data.fullTime != undefined){
-          this.companyDetailForm.get('bio').setValue(res.data.fullTime);
+        if(res.data.bio != undefined){
+          this.companyDetailForm.get('bio').setValue(res.data.bio);
         }
-        if(res.data.fullTime != undefined){
-          this.companyDetailForm.get('website').setValue(res.data.fullTime);
+        if(res.data.webSite != undefined){
+          this.companyDetailForm.get('webSite').setValue(res.data.webSite);
         }
       } else {
         this.userDetailForm.get('name').setValue(res.data.name);
