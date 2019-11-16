@@ -95,6 +95,11 @@ const UserSchema = new Schema({
     type:String,
     default:"",
     required:false
+  },
+  bio:{
+    type:String,
+    default:"",
+    required:false
   }
 });
 

@@ -10,6 +10,8 @@ import { UserProfileComponent } from './components/user/user-profile/user-profil
 import { CompanyHomeComponent } from './components/company/company-home/company-home.component';
 import { AdminGuard } from './_helpers/admin.guard';
 import { CompanyGuard } from './_helpers/company.guard';
+import { CompanyDetailsComponent } from './components/company/company-details/company-details.component';
+import { UserHomeComponent } from './components/user/user-home/user-home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -18,6 +20,8 @@ const routes: Routes = [
   { path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   { path: 'admin', component: AdminComponent, canActivate: [AuthGuard,AdminGuard]},
   { path: 'company-home', component: CompanyHomeComponent, canActivate: [AuthGuard,CompanyGuard]},
+  { path: 'company-details/:id', component: CompanyDetailsComponent, canActivate: [AuthGuard]},
+  { path: 'user-home', component: UserHomeComponent, canActivate: [AuthGuard]},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

@@ -13,7 +13,17 @@ export class CompanyService {
         return this.http.post<any>(`${environment.apiUrl}/users/allCompany`,{});
     }
 
+    getCompanyById(id:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/getCompanyById`,{id});
+    }
+
     getVerificationRequest(employer:string){
         return this.http.post<any>(`${environment.apiUrl}/users/getVerificationRequests`,{employer});
     }
+
+    
+    getVerifiedUsers(employer:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/getVerifiedUsers`,{employer});
+    }
+
 }

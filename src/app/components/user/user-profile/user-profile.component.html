@@ -5,7 +5,7 @@
         <div class="alert alert-warning" role="alert" *ngIf="!currentUser?.verified && currentUser?.employer !== ''">
                 Your profile is not verified Yet by your current employer
             </div>
-    <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="!isCompany" [formGroup]="userDetailForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -244,6 +244,210 @@
                                         [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
                                     <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
                                         <div *ngIf="f.country.error.required">Country is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <form *ngIf="isCompany" [formGroup]="companyDetailForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://www.cqse.eu/images/company/company-landscape.png"
+                        alt="" />
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{currentUser?.name}}
+                    </h5>
+                    <h6>
+                        {{currentUser?.webSite}}
+                    </h6>
+                    <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Timeline</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary mr-1">Save Profile</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br />
+                    <a href="">Bootsnipp Profile</a><br />
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br />
+                    <a href="">Web Developer</a><br />
+                    <a href="">WordPress</a><br />
+                    <a href="">WooCommerce</a><br />
+                    <a href="">PHP, .Net</a><br />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Company Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="name" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.name.errors }" />
+                                    <div *ngIf="submitted && c.name.errors" class="invalid-feedback">
+                                        <div *ngIf="c.name.errors.required">Name is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Company Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="email" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.email.errors }" />
+                                    <div *ngIf="submitted && c.email.errors" class="invalid-feedback">
+                                        <div *ngIf="c.email.errors.required">Email is required</div>
+                                        <div *ngIf="c.email.errors.email">Email must be a valid email address</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Corporate Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="contactNumber" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.contactNumber.errors }" />
+                                    <div *ngIf="submitted && c.contactNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="c.contactNumber.error.required">Phone Number is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Founded Date</label>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="pickerfounned" formControlName="dob"
+                                        placeholder="Choose a date">
+                                    <mat-datepicker-toggle matSuffix [for]="pickerfounned"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerfounned></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Website</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="webSite" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.webSite.errors }" />
+                                    <div *ngIf="submitted && c.webSite.errors" class="invalid-feedback">
+                                        <div *ngIf="c.webSite.error.required">Website is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Biography</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea formControlName="bio" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.bio.errors }"></textarea>
+                                    <div *ngIf="submitted && c.bio.errors" class="invalid-feedback">
+                                        <div *ngIf="c.bio.error.required">Bio. is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea formControlName="address" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.address.errors }"></textarea>
+                                    <div *ngIf="submitted && c.address.errors" class="invalid-feedback">
+                                        <div *ngIf="c.address.error.required">Address is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Postal Code</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="postalCode" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.postalCode.errors }" />
+                                    <div *ngIf="submitted && c.postalCode.errors" class="invalid-feedback">
+                                        <div *ngIf="c.postalCode.error.required">PostalCode is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>City</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="city" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.city.errors }" />
+                                    <div *ngIf="submitted && c.city.errors" class="invalid-feedback">
+                                        <div *ngIf="c.city.error.required">City is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Country</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="country" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && c.country.errors }" />
+                                    <div *ngIf="submitted && c.country.errors" class="invalid-feedback">
+                                        <div *ngIf="c.country.error.required">Country is required</div>
                                     </div>
                                 </div>
                             </div>

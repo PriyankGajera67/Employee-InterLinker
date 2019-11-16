@@ -59,7 +59,9 @@ export class LogInComponent implements OnInit {
                   debugger;
                   if(data.role === 'ADMIN'){
                     this.router.navigate(['/admin']);
-                  } else{
+                  } else if(data.role === 'COMPANY') {
+                    this.router.navigate(['/company-home']);
+                  } else {
                     this.router.navigate([this.returnUrl]);
                   }
               },
