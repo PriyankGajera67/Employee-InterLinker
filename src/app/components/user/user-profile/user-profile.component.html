@@ -311,7 +311,7 @@
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Name</label>
+                                <label>Company Name</label>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -325,7 +325,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Email</label>
+                                <label>Company Email</label>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -340,7 +340,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Phone</label>
+                                <label>Corporate Phone</label>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -354,7 +354,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Date of Birth</label>
+                                <label>Founded Date</label>
                             </div>
                             <div class="col-md-6">
                                 <mat-form-field>
@@ -367,80 +367,34 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <label>Employer</label>
+                                <label>Website</label>
                             </div>
                             <div class="col-md-6">
-                                    <div class="form-group">
-                                <select formControlName="employer" class="form-control"
-                                    [ngClass]="{ 'is-invalid': submitted && f.employer.errors }">
-                                    <option *ngFor="let c of companies" [ngValue]="c.value">{{ c.name }}</option>
-                                </select>
-                                <div *ngIf="submitted && f.employer.errors" class="invalid-feedback">
-                                    <div *ngIf="f.employer.errors.required">Employer is required</div>
-                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="website" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.website.errors }" />
+                                    <div *ngIf="submitted && f.website.errors" class="invalid-feedback">
+                                        <div *ngIf="f.website.error.required">Website is required</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
-                                <div class="col-md-6">
-                                    <label>Position</label>
-                                </div>
-                                <div class="col-md-6">
-                                        <div class="form-group">
-                                                <input type="text" formControlName="position" class="form-control"
-                                                    [ngClass]="{ 'is-invalid': submitted && f.position.errors }" />
-                                                <div *ngIf="submitted && f.position.errors" class="invalid-feedback">
-                                                    <div *ngIf="f.position.error.required">Position is required</div>
-                                                </div>
-                                            </div>
+                            <div class="col-md-6">
+                                <label>Biography</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea formControlName="bio" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.bio.errors }"></textarea>
+                                    <div *ngIf="submitted && f.bio.errors" class="invalid-feedback">
+                                        <div *ngIf="f.bio.error.required">Bio. is required</div>
+                                    </div>
                                 </div>
                             </div>
+                        </div>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Gender</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" value="Male" formControlName="gender">
-                                    <span>Male</span>
-                                </label>
-                                &nbsp;
-                                <label>
-                                    <input type="radio" value="Female" formControlName="gender">
-                                    <span>Female</span>
-                                </label> </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Employment Status</label>
-                            </div>
-                            <div class="col-md-6">
-                                <label>
-                                    <input type="radio" value="true" formControlName="fullTime">
-                                    <span>Full-Time</span>
-                                </label>
-                                &nbsp;
-                                <label>
-                                    <input type="radio" value="false" formControlName="fullTime">
-                                    <span>Part-Time</span>
-                                </label> </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label>Joining Date</label>
-                            </div>
-                            <div class="col-md-6">
-                                <mat-form-field>
-                                    <input matInput [matDatepicker]="picker" formControlName="joiningDate"
-                                        placeholder="Choose a date">
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                </mat-form-field>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <label>Address</label>
