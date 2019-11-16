@@ -11,9 +11,10 @@ import { CompanyService } from 'src/app/_services/company.service';
 export class UserProfileComponent implements OnInit {
 
   constructor(private userService: UserService,private companyService:CompanyService,private formBuilder: FormBuilder) { }
-  isCompany: false;
+  isCompany: true;
   currentUser : any;
   userDetailForm: FormGroup;
+  companyDetailForm: FormGroup;
   submitted = false;
   inProgress = false;
   companies= [];
@@ -41,6 +42,19 @@ export class UserProfileComponent implements OnInit {
       fullTime:[''],
       position:['']
   });
+
+    this.companyDetailForm = this.formBuilder.group({
+        email: ['', [Validators.required, Validators.email]],
+        dob:['', Validators.required],
+        name:['', Validators.required],
+        address:[''],
+        postalCode:[''],
+        country:[''],
+        city:[''],
+        website:[''],
+        bio:[''],
+        contactNumber:['', Validators.required],
+    });
   }
 
     // convenience getter for easy access to form fields
@@ -73,41 +87,71 @@ export class UserProfileComponent implements OnInit {
     SET_USER_DATA(res){
       console.log(res);
       this.currentUser = res.data;
-      this.userDetailForm.get('name').setValue(res.data.name);
-      this.userDetailForm.get('email').setValue(res.data.email);
-      if(res.data.dob != undefined){
-        this.userDetailForm.get('dob').setValue(res.data.dob);
+      if(this.isCompany){
+        this.companyDetailForm.get('name').setValue(res.data.name);
+        this.companyDetailForm.get('email').setValue(res.data.email);
+        if(res.data.dob != undefined){
+          this.companyDetailForm.get('dob').setValue(res.data.dob);
+        }
+        if(res.data.address != undefined){
+          this.companyDetailForm.get('address').setValue(res.data.address);
+        }
+        if(res.data.postalCode != undefined){
+          this.companyDetailForm.get('postalCode').setValue(res.data.postalCode);
+        }
+        if(res.data.country != undefined){
+          this.companyDetailForm.get('country').setValue(res.data.country);
+        }
+        if(res.data.city != undefined){
+          this.companyDetailForm.get('city').setValue(res.data.city);
+        }
+        if(res.data.contactNumber != undefined){
+          this.companyDetailForm.get('contactNumber').setValue(res.data.contactNumber);
+        }
+        if(res.data.fullTime != undefined){
+          this.companyDetailForm.get('bio').setValue(res.data.fullTime);
+        }
+        if(res.data.fullTime != undefined){
+          this.companyDetailForm.get('website').setValue(res.data.fullTime);
+        }
+      } else {
+        this.userDetailForm.get('name').setValue(res.data.name);
+        this.userDetailForm.get('email').setValue(res.data.email);
+        if(res.data.dob != undefined){
+          this.userDetailForm.get('dob').setValue(res.data.dob);
+        }
+        if(res.data.address != undefined){
+          this.userDetailForm.get('address').setValue(res.data.address);
+        }
+        if(res.data.postalCode != undefined){
+          this.userDetailForm.get('postalCode').setValue(res.data.postalCode);
+        }
+        if(res.data.country != undefined){
+          this.userDetailForm.get('country').setValue(res.data.country);
+        }
+        if(res.data.city != undefined){
+          this.userDetailForm.get('city').setValue(res.data.city);
+        }
+        if(res.data.joiningDate != undefined){
+          this.userDetailForm.get('joiningDate').setValue(res.data.joiningDate);
+        }
+        if(res.data.gender != undefined){
+          this.userDetailForm.get('gender').setValue(res.data.gender);
+        }
+        if(res.data.employer != undefined){
+          this.userDetailForm.get('employer').setValue(res.data.employer);
+        }
+        if(res.data.contactNumber != undefined){
+          this.userDetailForm.get('contactNumber').setValue(res.data.contactNumber);
+        }
+        if(res.data.fullTime != undefined){
+          this.userDetailForm.get('fullTime').setValue(res.data.fullTime);
+        }
+        if(res.data.position != undefined){
+          this.userDetailForm.get('position').setValue(res.data.position);
+        }
       }
-      if(res.data.address != undefined){
-        this.userDetailForm.get('address').setValue(res.data.address);
-      }
-      if(res.data.postalCode != undefined){
-        this.userDetailForm.get('postalCode').setValue(res.data.postalCode);
-      }
-      if(res.data.country != undefined){
-        this.userDetailForm.get('country').setValue(res.data.country);
-      }
-      if(res.data.city != undefined){
-        this.userDetailForm.get('city').setValue(res.data.city);
-      }
-      if(res.data.joiningDate != undefined){
-        this.userDetailForm.get('joiningDate').setValue(res.data.joiningDate);
-      }
-      if(res.data.gender != undefined){
-        this.userDetailForm.get('gender').setValue(res.data.gender);
-      }
-      if(res.data.employer != undefined){
-        this.userDetailForm.get('employer').setValue(res.data.employer);
-      }
-      if(res.data.contactNumber != undefined){
-        this.userDetailForm.get('contactNumber').setValue(res.data.contactNumber);
-      }
-      if(res.data.fullTime != undefined){
-        this.userDetailForm.get('fullTime').setValue(res.data.fullTime);
-      }
-      if(res.data.position != undefined){
-        this.userDetailForm.get('position').setValue(res.data.position);
-      }
+
       this.inProgress = false;
     }
 

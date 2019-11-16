@@ -5,7 +5,7 @@
         <div class="alert alert-warning" role="alert" *ngIf="!currentUser?.verified && currentUser?.employer !== ''">
                 Your profile is not verified Yet by your current employer
             </div>
-    <form [formGroup]="userDetailForm" (ngSubmit)="onSubmit()">
+    <form *ngIf="!isCompany" [formGroup]="userDetailForm" (ngSubmit)="onSubmit()">
         <div class="row">
             <div class="col-md-4">
                 <div class="profile-img">
@@ -24,6 +24,255 @@
                     </h5>
                     <h6>
                         {{currentUser?.position}}
+                    </h6>
+                    <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                                aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Timeline</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary mr-1">Save Profile</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br />
+                    <a href="">Bootsnipp Profile</a><br />
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br />
+                    <a href="">Web Developer</a><br />
+                    <a href="">WordPress</a><br />
+                    <a href="">WooCommerce</a><br />
+                    <a href="">PHP, .Net</a><br />
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Name</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="name" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+                                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                        <div *ngIf="f.name.errors.required">Name is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="email" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">Email is required</div>
+                                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phone</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="contactNumber" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }" />
+                                    <div *ngIf="submitted && f.contactNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="f.contactNumber.error.required">Phone Number is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Date of Birth</label>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="pickerdob" formControlName="dob"
+                                        placeholder="Choose a date">
+                                    <mat-datepicker-toggle matSuffix [for]="pickerdob"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerdob></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Employer</label>
+                            </div>
+                            <div class="col-md-6">
+                                    <div class="form-group">
+                                <select formControlName="employer" class="form-control"
+                                    [ngClass]="{ 'is-invalid': submitted && f.employer.errors }">
+                                    <option *ngFor="let c of companies" [ngValue]="c.value">{{ c.name }}</option>
+                                </select>
+                                <div *ngIf="submitted && f.employer.errors" class="invalid-feedback">
+                                    <div *ngIf="f.employer.errors.required">Employer is required</div>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                                <div class="col-md-6">
+                                    <label>Position</label>
+                                </div>
+                                <div class="col-md-6">
+                                        <div class="form-group">
+                                                <input type="text" formControlName="position" class="form-control"
+                                                    [ngClass]="{ 'is-invalid': submitted && f.position.errors }" />
+                                                <div *ngIf="submitted && f.position.errors" class="invalid-feedback">
+                                                    <div *ngIf="f.position.error.required">Position is required</div>
+                                                </div>
+                                            </div>
+                                </div>
+                            </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Gender</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>
+                                    <input type="radio" value="Male" formControlName="gender">
+                                    <span>Male</span>
+                                </label>
+                                &nbsp;
+                                <label>
+                                    <input type="radio" value="Female" formControlName="gender">
+                                    <span>Female</span>
+                                </label> </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Employment Status</label>
+                            </div>
+                            <div class="col-md-6">
+                                <label>
+                                    <input type="radio" value="true" formControlName="fullTime">
+                                    <span>Full-Time</span>
+                                </label>
+                                &nbsp;
+                                <label>
+                                    <input type="radio" value="false" formControlName="fullTime">
+                                    <span>Part-Time</span>
+                                </label> </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Joining Date</label>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field>
+                                    <input matInput [matDatepicker]="picker" formControlName="joiningDate"
+                                        placeholder="Choose a date">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Address</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea formControlName="address" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
+                                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                        <div *ngIf="f.address.error.required">Address is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Postal Code</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="postalCode" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" />
+                                    <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
+                                        <div *ngIf="f.postalCode.error.required">PostalCode is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>City</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="city" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
+                                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                                        <div *ngIf="f.city.error.required">City is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Country</label>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" formControlName="country" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
+                                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
+                                        <div *ngIf="f.country.error.required">Country is required</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+    <form *ngIf="isCompany" [formGroup]="companyDetailForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
+                        alt="" />
+                    <div class="file btn btn-lg btn-primary">
+                        Change Photo
+                        <input type="file" name="file" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{currentUser?.name}}
+                    </h5>
+                    <h6>
                     </h6>
                     <!-- <p class="proile-rating">RANKINGS : <span>8/10</span></p> -->
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
