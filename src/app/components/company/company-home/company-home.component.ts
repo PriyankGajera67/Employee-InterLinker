@@ -1,5 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CompanyService, UserService, ConnectionsService } from 'src/app/_services';
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+
+export interface ConnectionElement {
+  avatar: string;
+  name: string;
+  position: string;
+  email:string;
+  action: string;
+}
+
+const ELEMENT_DATA: ConnectionElement[] = [
+  {avatar: "f", name: 'Hydrogen',email:"", position: "fasdfa", action: 'H'}
+];
 
 @Component({
   selector: 'app-company-home',
@@ -12,10 +26,16 @@ export class CompanyHomeComponent implements OnInit {
   currentUserId: "";
   role: string;
   currentUser: any;
-  verificationRequests = [];
   employeeList = [];
   comments: string;
   count: number;
+  verificationRequests:ConnectionElement[] = [];
+
+  displayedColumns: string[] = ["avatar", "name","email", "position","action"];
+  dataSource:any;
+
+  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+
   ngOnInit() {
     this.count = 0;
     this.userService.getCurrentUser().subscribe(res => {
@@ -35,12 +55,24 @@ export class CompanyHomeComponent implements OnInit {
    // }
   }
 
+  
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
   setVerificationRequest(res) {
     let verificationRequestList = []
     res.data.forEach(element => {
-      verificationRequestList.push(element);
+      this.verificationRequests.push({
+        avatar: element.avatar,
+        name: element.name,
+        email:element.email,
+        position: element.position,
+        action: element._id,
+      });
     });
-    this.verificationRequests = verificationRequestList;
+
+    this.dataSource = new MatTableDataSource (this.verificationRequests);
+    this.dataSource.paginator = this.paginator;
   }
 
   setEmployeeList(res) {
