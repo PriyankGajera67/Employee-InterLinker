@@ -9,17 +9,22 @@ const passport = require("passport");
 const Connections = require("../../models/Connections");
 
 router.post("/addConnection", (req, res) => {
-  const newConnection = new Connections({
-    userId: req.body.userId,
-    connectionId: req.body.connectionId,
-    name: req.body.name,
-    employer: req.body.employer,
-    position:req.body.position
+  Connections.findOne({ userId: req.body.userId, connectionId:req.body.connectionId }).then(connection => {
+    if (connection) {
+      return res.status(400).json({ email: "Connection already exists" });
+    } else {
+      const newConnection = new Connections({
+        userId: req.body.userId,
+        connectionId: req.body.connectionId,
+        name: req.body.name,
+        employer: req.body.employer,
+        position:req.body.position
+      });
+      newConnection.save().then(user => {
+        return res.json(user)
+      }).catch(err => console.log(err));
+    }
   });
-
-  newConnection.save().then(user => {
-    return res.json(user)
-  }).catch(err => console.log(err));
 });
 
 
