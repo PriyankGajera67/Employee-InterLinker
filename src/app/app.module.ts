@@ -15,6 +15,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { DataTableModule } from 'ng-angular8-datatable';
+
+
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { LogInComponent } from './components/log-in/log-in.component';
 import { RegisterComponent } from './components/register/register.component';
@@ -22,6 +25,12 @@ import { HomeComponent } from './components/home/home.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
 import { CompanyHomeComponent } from './components/company/company-home/company-home.component';
+import { CommentboxComponent } from './components/company/company-home/commentbox/commentbox.component';
+import { CommentsComponent } from './components/company/company-home/commentbox/comments/comments.component';
+import { ChildboxComponent } from './components/company/company-home/commentbox/childbox/childbox.component';
+import { CompanyDetailsComponent } from './components/company/company-details/company-details.component';
+import { UserConnnectionsComponent } from './components/user/user-connnections/user-connnections.component';
+import { UserHomeComponent } from './components/user/user-home/user-home.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +40,13 @@ import { CompanyHomeComponent } from './components/company/company-home/company-
     HomeComponent,
     AdminComponent,
     UserProfileComponent,
-    CompanyHomeComponent
+    CompanyHomeComponent,
+    CommentboxComponent,
+    CommentsComponent,
+    ChildboxComponent,
+    CompanyDetailsComponent,
+    UserConnnectionsComponent,
+    UserHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +57,7 @@ import { CompanyHomeComponent } from './components/company/company-home/company-
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    DataTableModule,
     AgGridModule.withComponents([])
   ],
   providers: [
