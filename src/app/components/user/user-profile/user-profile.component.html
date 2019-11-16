@@ -316,9 +316,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" formControlName="name" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
-                                    <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                                        <div *ngIf="f.name.errors.required">Name is required</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.name.errors }" />
+                                    <div *ngIf="submitted && c.name.errors" class="invalid-feedback">
+                                        <div *ngIf="c.name.errors.required">Name is required</div>
                                     </div>
                                 </div>
                             </div>
@@ -330,10 +330,10 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" formControlName="email" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
-                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
-                                        <div *ngIf="f.email.errors.required">Email is required</div>
-                                        <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.email.errors }" />
+                                    <div *ngIf="submitted && c.email.errors" class="invalid-feedback">
+                                        <div *ngIf="c.email.errors.required">Email is required</div>
+                                        <div *ngIf="c.email.errors.email">Email must be a valid email address</div>
                                     </div>
                                 </div>
                             </div>
@@ -345,9 +345,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" formControlName="contactNumber" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }" />
-                                    <div *ngIf="submitted && f.contactNumber.errors" class="invalid-feedback">
-                                        <div *ngIf="f.contactNumber.error.required">Phone Number is required</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.contactNumber.errors }" />
+                                    <div *ngIf="submitted && c.contactNumber.errors" class="invalid-feedback">
+                                        <div *ngIf="c.contactNumber.error.required">Phone Number is required</div>
                                     </div>
                                 </div>
                             </div>
@@ -358,10 +358,10 @@
                             </div>
                             <div class="col-md-6">
                                 <mat-form-field>
-                                    <input matInput [matDatepicker]="pickerdob1" formControlName="dob"
+                                    <input matInput [matDatepicker]="pickerfounned" formControlName="dob"
                                         placeholder="Choose a date">
-                                    <mat-datepicker-toggle matSuffix [for]="pickerdob1"></mat-datepicker-toggle>
-                                    <mat-datepicker #pickerdob1></mat-datepicker>
+                                    <mat-datepicker-toggle matSuffix [for]="pickerfounned"></mat-datepicker-toggle>
+                                    <mat-datepicker #pickerfounned></mat-datepicker>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -372,9 +372,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" formControlName="webSite" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.webSite.errors }" />
-                                    <div *ngIf="submitted && f.webSite.errors" class="invalid-feedback">
-                                        <div *ngIf="f.webSite.error.required">Website is required</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.webSite.errors }" />
+                                    <div *ngIf="submitted && c.webSite.errors" class="invalid-feedback">
+                                        <div *ngIf="c.webSite.error.required">Website is required</div>
                                     </div>
                                 </div>
                             </div>
@@ -386,9 +386,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <textarea formControlName="bio" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.bio.errors }"></textarea>
-                                    <div *ngIf="submitted && f.bio.errors" class="invalid-feedback">
-                                        <div *ngIf="f.bio.error.required">Bio. is required</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.bio.errors }"></textarea>
+                                    <div *ngIf="submitted && c.bio.errors" class="invalid-feedback">
+                                        <div *ngIf="c.bio.error.required">Bio. is required</div>
                                     </div>
                                 </div>
                             </div>
@@ -402,9 +402,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <textarea formControlName="address" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }"></textarea>
-                                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
-                                        <div *ngIf="f.address.error.required">Address is required</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.address.errors }"></textarea>
+                                    <div *ngIf="submitted && c.address.errors" class="invalid-feedback">
+                                        <div *ngIf="c.address.error.required">Address is required</div>
                                     </div>
                                 </div>
                             </div>
@@ -416,9 +416,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" formControlName="postalCode" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.postalCode.errors }" />
-                                    <div *ngIf="submitted && f.postalCode.errors" class="invalid-feedback">
-                                        <div *ngIf="f.postalCode.error.required">PostalCode is required</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.postalCode.errors }" />
+                                    <div *ngIf="submitted && c.postalCode.errors" class="invalid-feedback">
+                                        <div *ngIf="c.postalCode.error.required">PostalCode is required</div>
                                     </div>
                                 </div>
                             </div>
@@ -430,9 +430,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" formControlName="city" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.city.errors }" />
-                                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
-                                        <div *ngIf="f.city.error.required">City is required</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.city.errors }" />
+                                    <div *ngIf="submitted && c.city.errors" class="invalid-feedback">
+                                        <div *ngIf="c.city.error.required">City is required</div>
                                     </div>
                                 </div>
                             </div>
@@ -444,9 +444,9 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" formControlName="country" class="form-control"
-                                        [ngClass]="{ 'is-invalid': submitted && f.country.errors }" />
-                                    <div *ngIf="submitted && f.country.errors" class="invalid-feedback">
-                                        <div *ngIf="f.country.error.required">Country is required</div>
+                                        [ngClass]="{ 'is-invalid': submitted && c.country.errors }" />
+                                    <div *ngIf="submitted && c.country.errors" class="invalid-feedback">
+                                        <div *ngIf="c.country.error.required">Country is required</div>
                                     </div>
                                 </div>
                             </div>

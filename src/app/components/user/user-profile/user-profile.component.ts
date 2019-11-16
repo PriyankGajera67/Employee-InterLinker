@@ -60,15 +60,23 @@ export class UserProfileComponent implements OnInit {
 
     // convenience getter for easy access to form fields
     get f() { return this.userDetailForm.controls; }
+    get c() { return this.companyDetailForm.controls; }
 
     onSubmit() {
         this.submitted = true;
         this.inProgress = true;
   
         // stop here if form is invalid
-        if (this.userDetailForm.invalid) {
+        if(this.isCompany){
+          if (this.companyDetailForm.invalid) {
             return;
+          }
+        } else {
+          if (this.userDetailForm.invalid) {
+            return;
+          }
         }
+
   
         // display form values on success
         console.log(this.userDetailForm.value, null, 4);
