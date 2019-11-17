@@ -1,4 +1,9 @@
 <div class="container-fluid" style="margin-top:4rem">
+        <div class="container" *ngIf="myConnections?.length == 0">
+                <div class="alert alert-success" role="alert">
+                        You don't have a any connections till now.
+                      </div>
+        </div>
     <div class="row">
         <div class="col-md-3" *ngFor="let e of myConnections">
             <div class="card">

@@ -60,5 +60,19 @@
   </nav>
 </div>
 
+
+<div class="nav-scroller bg-white box-shadow" *ngIf="currentUser?.role === 'COMPANY'">
+    <nav class="nav nav-underline nav-blue">
+      <a class="nav-link active" [routerLink]="['/company-home']">
+        <i class="material-icons">
+          group
+        </i> My Dashboard</a>
+      <a class="nav-link" [routerLink]="['/profile']">
+        <i class="material-icons">
+          perm_identity
+        </i> My Profile</a>
+    </nav>
+  </div>
+
 <!-- main app container -->
 <router-outlet></router-outlet>
