@@ -31,7 +31,7 @@ router.post("/addConnection", (req, res) => {
 router.post("/getMyConnnections", (req, res) => {
   data = req.body;
   console.log(data.userId);
-  Connections.find({ userId: data.userId,verified:true }, (err, data) => {
+  Connections.find({ userId: data.userId,varified:true }, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
@@ -45,9 +45,17 @@ router.post("/getConnnectionRequests", (req, res) => {
   });
 });
 
+router.post("/acceptRequest", (req, res) => {
+  data = req.body;
+  Connections.update({_id: data.Id},{varified:true }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
 router.post("/removeConnection", (req, res) => {
   data = req.body;
-  Connections.find({ connectionId: data.connectionId,verified:true }, (err, data) => {
+  Connections.find({ connectionId: data.connectionId,varified:true }, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });

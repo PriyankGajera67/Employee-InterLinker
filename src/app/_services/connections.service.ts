@@ -25,6 +25,11 @@ export class ConnectionsService {
         return this.http.post<any>(`${environment.apiUrl}/connections/getConnnectionRequests`, { connectionId});
     }
 
+    acceptRequest(Id: string) {
+        console.log("inside");
+        return this.http.post<any>(`${environment.apiUrl}/connections/acceptRequest`, { Id});
+    }
+
     
 
     
