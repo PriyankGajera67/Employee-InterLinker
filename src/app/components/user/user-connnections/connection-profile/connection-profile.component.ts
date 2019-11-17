@@ -11,11 +11,13 @@ export class ConnectionProfileComponent implements OnInit {
   userId:any;
   connectionUser:any;
   connectionEmployer:any;
+  isRequests:false;
   constructor(private route: ActivatedRoute,private userService:UserService,private companyService:CompanyService) { }
 
   ngOnInit() {
     this.route.params.subscribe(param =>{
       this.userId = param.id;
+      this.isRequests = param.isRequests;
     });
     this.userService.getUser(this.userId).subscribe(res =>{
       this.connectionUser = res.data;

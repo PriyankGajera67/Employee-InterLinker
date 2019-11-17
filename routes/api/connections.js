@@ -18,7 +18,12 @@ router.post("/addConnection", (req, res) => {
         connectionId: req.body.connectionId,
         name: req.body.name,
         employer: req.body.employer,
-        position:req.body.position
+        position:req.body.position,
+        bio:req.body.bio,
+        senderName: req.body.senderName,
+        senderEmployer: req.body.senderEmployer,
+        senderPosition:req.body.senderPosition,
+        senderBio:req.body.senderBio
       });
       newConnection.save().then(user => {
         return res.json(user)

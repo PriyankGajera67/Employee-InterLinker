@@ -83,15 +83,15 @@ export class CompanyHomeComponent implements OnInit {
     this.employeeList = employees;
   }
 
-  addConnection(id:string){
-    let requestConnection:any = [];
-    this.employeeList.find(e =>{
-      if(e._id == id){
-        requestConnection = e;
-      }
-    })
-    this.connectionsService.makeConnection(this.currentUserId,requestConnection._id,requestConnection.name,requestConnection.employee,requestConnection.position);
-  }
+  // addConnection(id:string){
+  //   let requestConnection:any = [];
+  //   this.employeeList.find(e =>{
+  //     if(e._id == id){
+  //       requestConnection = e;
+  //     }
+  //   })
+  //   this.connectionsService.makeConnection(this.currentUserId,requestConnection._id,requestConnection.name,requestConnection.employee,requestConnection.position);
+  // }
   onVerifyUser(email) {
     this.userService.verifyCompany(email).subscribe(data => {
       this.companyService.getVerificationRequest(this.currentUserId).subscribe(res => {

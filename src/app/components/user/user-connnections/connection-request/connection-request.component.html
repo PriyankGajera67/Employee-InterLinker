@@ -7,10 +7,9 @@
                             <img
                                 src="https://www.pinclipart.com/picdir/middle/355-3553881_stockvader-predicted-adig-user-profile-icon-png-clipart.png">
                         </div>
-                        <h2>{{e.name}}<br><span>{{e.position}}</span></h2>
-                        <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et.</p>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-primary" [routerLink]="[ '/user/my-connections',e.userId]"><i style="vertical-align: bottom;" class="material-icons">
+                        <h2>{{e.senderName}}<br><span>{{e.senderPosition}}</span></h2>
+                        <p> {{e.senderBio}}</p>
+                            <button type="button" class="btn btn-lg btn-block btn-outline-primary" [routerLink]="[ '/user/my-connections',e.userId,true]"><i style="vertical-align: bottom;" class="material-icons">
                                     details
                                     </i> View Profile</button>
                          <button type="button" class="btn btn-lg btn-block btn-outline-primary" (click)="acceptRequest(e._id)"><i style="vertical-align: bottom;" class="material-icons">

@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'user-home', component: UserHomeComponent, canActivate: [AuthGuard]},
   { path: 'user/my-connections', component: UserConnnectionsComponent, canActivate: [AuthGuard]},
   { path: 'user/connection-requests', component: ConnectionRequestComponent, canActivate: [AuthGuard]},
-  { path: 'user/my-connections/:id', component: ConnectionProfileComponent, canActivate: [AuthGuard]},
+  { path: 'user/my-connections/:id/:isRequests', component: ConnectionProfileComponent, canActivate: [AuthGuard]},
 
   // otherwise redirect to home
   { path: '**', redirectTo: '' }

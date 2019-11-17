@@ -8,10 +8,10 @@ import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class ConnectionsService {
     constructor(private http: HttpClient) { }
-    makeConnection(userId: string,connectionId: string, name: string, employer: string,position:string) {
+    makeConnection(userId: string,connectionId: string, name: string, employer: string,position:string,bio:string,senderName:string,senderEmployer:string,senderPosition:string,senderBio:string) {
         let role = 'REGULAR';
         console.log("inside");
-        return this.http.post<any>(`${environment.apiUrl}/connections/addConnection`, { userId,connectionId,name,employer,position});
+        return this.http.post<any>(`${environment.apiUrl}/connections/addConnection`, { userId,connectionId,name,employer,position,bio,senderName,senderEmployer,senderPosition,senderBio});
     }
 
 
