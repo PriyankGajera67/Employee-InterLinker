@@ -35,6 +35,11 @@ export class ConnectionsService {
         return this.http.post<any>(`${environment.apiUrl}/connections/acceptRequest`, { Id});
     }
 
+    removeConnection(Id: string) {
+        console.log("inside");
+        return this.http.post<any>(`${environment.apiUrl}/connections/removeConnection`, { Id});
+    }
+
     
 
     

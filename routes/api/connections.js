@@ -68,7 +68,7 @@ router.post("/acceptRequest", (req, res) => {
 
 router.post("/removeConnection", (req, res) => {
   data = req.body;
-  Connections.find({ connectionId: data.connectionId,varified:true }, (err, data) => {
+  Connections.remove({_id: data.Id}, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });

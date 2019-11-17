@@ -26,4 +26,10 @@ export class ConnectionApprovedListComponent implements OnInit {
     this.myConnections = connections;
   }
 
+  removeConnection(id){
+    this.connectionsService.removeConnection(id).subscribe(res =>{
+      console.log(res);
+    })
+  }
+
 }
