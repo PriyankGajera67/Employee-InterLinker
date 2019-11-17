@@ -7,35 +7,54 @@
 </nav> -->
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-      <a class="navbar-brand" routerLink="/">Employee InterLinker</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">Employee InterLinker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-  
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item" *ngIf="!currentUser">
-                <a class="nav-link" [routerLink]="['/login']" role="button" >
-              Sign in
-                </a>
-          </li>
-          <li class="nav-item dropdown" *ngIf="currentUser">
-            <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              User
-            </a>
-            <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
-            <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item"  [routerLink]="['/profile']" >Profile</a>
-              <!-- <a class="dropdown-item" href="#">Another action</a> -->
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item"  *ngIf="currentUser" (click)="logout()">log out</a>
-            </div>
-          </li>
-        </ul>
-      </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item" *ngIf="!currentUser">
+          <a class="nav-link" [routerLink]="['/login']" role="button">
+            Sign in
+          </a>
+        </li>
+        <li class="nav-item dropdown" *ngIf="currentUser">
+          <a class="nav-link dropdown-toggle" href="javascript:void(0);" id="navbarDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            User
+          </a>
+          <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
+          <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" [routerLink]="['/profile']">Profile</a>
+            <!-- <a class="dropdown-item" href="#">Another action</a> -->
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" *ngIf="currentUser" (click)="logout()">log out</a>
+          </div>
+        </li>
+      </ul>
     </div>
+  </div>
+</nav>
+
+<div class="nav-scroller bg-white box-shadow" *ngIf="currentUser?.role === 'REGULAR'">
+  <nav class="nav nav-underline nav-blue">
+    <a class="nav-link" [routerLink]="['/home']">
+      <i class="material-icons">
+        home
+      </i>Home</a>
+    <a class="nav-link active" [routerLink]="['/user/my-connections']">
+      <i class="material-icons">
+        group
+      </i> My Connections</a>
+    <a class="nav-link" [routerLink]="['/profile']">
+      <i class="material-icons">
+        perm_identity
+      </i> My Profile</a>
   </nav>
+</div>
 
 <!-- main app container -->
 <router-outlet></router-outlet>

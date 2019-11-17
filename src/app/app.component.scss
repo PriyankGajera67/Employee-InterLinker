@@ -1,5 +1,4 @@
 /* Change this breakpoint if you change the breakpoint of the navbar */
-
 @media (min-width: 992px) {
     .animate {
       animation-duration: 0.3s;
@@ -42,4 +41,29 @@
   .slideIn {
     -webkit-animation-name: slideIn;
     animation-name: slideIn;
+  }
+
+  .nav-blue {
+    background: #0f50a0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#115cb7), to(#0f50a0));
+    background: linear-gradient(#115cb7, #0f50a0);
+    a {
+      color:white;
+      i{
+        vertical-align: bottom;
+      }
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+  
+        background: -webkit-gradient(
+          linear,
+          left top,
+          left bottom,
+          from(rgba(255, 255, 255, 0.2)),
+          to(rgba(255, 255, 255, 0.15))
+        );
+  
+        background: linear-gradient(rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.15));
+      }
+    }
   }
