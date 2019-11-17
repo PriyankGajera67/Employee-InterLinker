@@ -157,6 +157,7 @@
         </div>
     </form>   
     <div class="row" style="float:right;">
-      <a class="" [routerLink]="requestId != undefined ? [ '/user/my-connections'] : [ '/user/my-connections1']">Back to connections</a>
+      <a class="requestId == undefied" [routerLink]="[ '/user/my-connections']">Back to Connections</a>
+      <a *ngIf="requestId" class="" [routerLink]="[ '/user/connection-requests']">Back to Connection Request</a>
     </div>        
 </div>
