@@ -33,6 +33,7 @@ import { UserConnnectionsComponent } from './components/user/user-connnections/u
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { ConnectionProfileComponent } from './components/user/user-connnections/connection-profile/connection-profile.component';
 import { ConnectionRequestComponent } from './components/user/user-connnections/connection-request/connection-request.component';
+import { ConnectionApprovedListComponent } from './components/user/user-connnections/connection-approved-list/connection-approved-list.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ConnectionRequestComponent } from './components/user/user-connnections/
     UserConnnectionsComponent,
     UserHomeComponent,
     ConnectionProfileComponent,
-    ConnectionRequestComponent
+    ConnectionRequestComponent,
+    ConnectionApprovedListComponent
   ],
   imports: [
     BrowserModule,

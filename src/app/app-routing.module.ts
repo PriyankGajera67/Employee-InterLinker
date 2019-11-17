@@ -15,6 +15,7 @@ import { UserHomeComponent } from './components/user/user-home/user-home.compone
 import { UserConnnectionsComponent } from './components/user/user-connnections/user-connnections.component';
 import { ConnectionProfileComponent } from './components/user/user-connnections/connection-profile/connection-profile.component';
 import { ConnectionRequestComponent } from './components/user/user-connnections/connection-request/connection-request.component';
+import { ConnectionApprovedListComponent } from './components/user/user-connnections/connection-approved-list/connection-approved-list.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'user-home', component: UserHomeComponent, canActivate: [AuthGuard]},
   { path: 'user/my-connections', component: UserConnnectionsComponent, canActivate: [AuthGuard]},
   { path: 'user/connection-requests', component: ConnectionRequestComponent, canActivate: [AuthGuard]},
+  { path: 'user/connection-requests-approved', component: ConnectionApprovedListComponent, canActivate: [AuthGuard]},
   { path: 'user/my-connections/:id', component: ConnectionProfileComponent, canActivate: [AuthGuard]},
   { path: 'user/connections-request/:id/:requestId', component: ConnectionProfileComponent, canActivate: [AuthGuard]},
 

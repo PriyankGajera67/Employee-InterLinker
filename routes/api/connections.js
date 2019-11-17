@@ -50,6 +50,14 @@ router.post("/getConnnectionRequests", (req, res) => {
   });
 });
 
+router.post("/getConnnectionRequestsApproved", (req, res) => {
+  data = req.body;
+  Connections.find({ connectionId: data.connectionId,varified:true }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
 router.post("/acceptRequest", (req, res) => {
   data = req.body;
   Connections.update({_id: data.Id},{varified:true }, (err, data) => {
