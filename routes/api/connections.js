@@ -31,10 +31,27 @@ router.post("/addConnection", (req, res) => {
 router.post("/getMyConnnections", (req, res) => {
   data = req.body;
   console.log(data.userId);
-  Connections.find({ userId: data.userId }, (err, data) => {
+  Connections.find({ userId: data.userId,verified:true }, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
 });
+
+router.post("/getConnnectionRequests", (req, res) => {
+  data = req.body;
+  Connections.find({ connectionId: data.connectionId,varified:false }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
+router.post("/removeConnection", (req, res) => {
+  data = req.body;
+  Connections.find({ connectionId: data.connectionId,verified:true }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
 
 module.exports = router;

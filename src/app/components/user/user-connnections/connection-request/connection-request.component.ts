@@ -13,7 +13,7 @@ export class ConnectionRequestComponent implements OnInit {
   currentUserId:any;
   ngOnInit() {
     this.currentUserId = JSON.parse(localStorage.getItem('currentUser')).id;
-    this.connectionsService.getMyConnection(this.currentUserId).subscribe(res =>{
+    this.connectionsService.getMyConnectionRequests(this.currentUserId).subscribe(res =>{
       this.setConnections(res);
     })
   }
