@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { UserService, CompanyService } from 'src/app/_services';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UserService, CompanyService, ConnectionsService } from 'src/app/_services';
 
 @Component({
   selector: 'app-connection-profile',
@@ -11,13 +11,15 @@ export class ConnectionProfileComponent implements OnInit {
   userId:any;
   connectionUser:any;
   connectionEmployer:any;
-  isRequests:false;
-  constructor(private route: ActivatedRoute,private userService:UserService,private companyService:CompanyService) { }
+  requestId:any;
+  constructor(  private router: Router,private route: ActivatedRoute,private userService:UserService,private companyService:CompanyService,private connectionsService: ConnectionsService) { }
 
   ngOnInit() {
     this.route.params.subscribe(param =>{
       this.userId = param.id;
-      this.isRequests = param.isRequests;
+      if(param.requestId){
+        this.requestId = param.requestId;
+      }
     });
     this.userService.getUser(this.userId).subscribe(res =>{
       this.connectionUser = res.data;
@@ -26,6 +28,14 @@ export class ConnectionProfileComponent implements OnInit {
       })
     });
 
+  }
+
+
+  
+  acceptRequest(id){
+    this.connectionsService.acceptRequest(id).subscribe(res =>{
+      this.router.navigate(['/']);
+    })
   }
 
 }

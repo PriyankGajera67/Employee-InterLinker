@@ -28,6 +28,9 @@
                 </div>
             </div>
             <div class="col-md-2">
+                    <button *ngIf="requestId" type="button" class="btn btn-lg btn-block btn-outline-primary" (click)="acceptRequest(requestId)"><i style="vertical-align: bottom;" class="material-icons">
+                         details
+                    </i> Accept</button>
                 <a href="mailto:{{connectionUser.email}}" class="btn btn-lg btn-block btn-outline-primary">Send Email</a>
             </div>
         </div>
@@ -152,5 +155,8 @@
                 </div>
             </div>
         </div>
-    </form>           
+    </form>   
+    <div class="row" style="float:right;">
+      <a class="" [routerLink]="requestId != undefined ? [ '/user/my-connections'] : [ '/user/my-connections1']">Back to connections</a>
+    </div>        
 </div>
