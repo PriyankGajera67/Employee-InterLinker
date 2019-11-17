@@ -14,6 +14,7 @@ import { CompanyDetailsComponent } from './components/company/company-details/co
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { UserConnnectionsComponent } from './components/user/user-connnections/user-connnections.component';
 import { ConnectionProfileComponent } from './components/user/user-connnections/connection-profile/connection-profile.component';
+import { ConnectionRequestComponent } from './components/user/user-connnections/connection-request/connection-request.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'company-details/:id', component: CompanyDetailsComponent, canActivate: [AuthGuard]},
   { path: 'user-home', component: UserHomeComponent, canActivate: [AuthGuard]},
   { path: 'user/my-connections', component: UserConnnectionsComponent, canActivate: [AuthGuard]},
+  { path: 'user/connection-requests', component: ConnectionRequestComponent, canActivate: [AuthGuard]},
   { path: 'user/my-connections/:id', component: ConnectionProfileComponent, canActivate: [AuthGuard]},
 
   // otherwise redirect to home

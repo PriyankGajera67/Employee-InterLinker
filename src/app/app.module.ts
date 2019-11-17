@@ -32,6 +32,7 @@ import { CompanyDetailsComponent } from './components/company/company-details/co
 import { UserConnnectionsComponent } from './components/user/user-connnections/user-connnections.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
 import { ConnectionProfileComponent } from './components/user/user-connnections/connection-profile/connection-profile.component';
+import { ConnectionRequestComponent } from './components/user/user-connnections/connection-request/connection-request.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { ConnectionProfileComponent } from './components/user/user-connnections/
     CompanyDetailsComponent,
     UserConnnectionsComponent,
     UserHomeComponent,
-    ConnectionProfileComponent
+    ConnectionProfileComponent,
+    ConnectionRequestComponent
   ],
   imports: [
     BrowserModule,

@@ -23,6 +23,11 @@ const ConnectionsSchema = new Schema({
     type:String,
     default:"Software Developer",
     required:true
+  },
+  varified:{
+    type:Boolean,
+    default:false,
+    required:true
   }
 });
 
