@@ -1,27 +1,79 @@
 <div class="container-fluid" style="margin-top:4rem">
-        <div class="container" *ngIf="myConnections?.length == 0">
-                <div class="alert alert-success" role="alert">
-                        You dont have a any approved connection requests.
-                      </div>
+    <div class="container" *ngIf="myConnections?.length == 0">
+        <div class="alert alert-success" role="alert">
+            You dont have a any approved connection requests.
         </div>
-        <div class="row">
-            <div class="col-md-3" *ngFor="let e of myConnections">
-                <div class="card">
-                    <div class="box">
-                        <div class="img">
-                            <img
-                                src="https://www.pinclipart.com/picdir/middle/355-3553881_stockvader-predicted-adig-user-profile-icon-png-clipart.png">
-                        </div>
-                        <h2>{{e.senderName}}<br><span>{{e.senderPosition}}</span></h2>
-                        <p> {{e.senderBio}}</p>
-                            <button type="button" class="btn btn-lg btn-block btn-outline-primary" [routerLink]="[ '/user/connections-request',e.userId,e._id]"><i style="vertical-align: bottom;" class="material-icons">
-                                    details
-                                    </i> View Profile</button>
-                         <button type="button" class="btn btn-lg btn-block btn-outline-primary" (click)="removeConnection(e._id)"><i style="vertical-align: bottom;" class="material-icons">
-                                            details
-                                            </i> Remove Connection</button>
+    </div>
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Employees">
+    </mat-form-field>
+
+    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="avatar">
+            <th mat-header-cell *matHeaderCellDef> Logo </th>
+            <td mat-cell *matCellDef="let element">
+                <img height="50" width="50"
+                    src="https://www.pinclipart.com/picdir/middle/355-3553881_stockvader-predicted-adig-user-profile-icon-png-clipart.png"
+                    alt="company-profile0pic" class="rounded-circle rounded-sm">
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> Position </th>
+            <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="view">
+                <th mat-header-cell *matHeaderCellDef> View </th>
+                <td mat-cell *matCellDef="let element"> 
+                        <button class="btn btn-success" [routerLink]="[ '/user/connections-request',element.view,element.action]">View Profile</button>
+                </td>
+            </ng-container>
+
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef> Action</th>
+            <td mat-cell *matCellDef="let element">
+                <button class="btn btn-danger"  (click)="removeConnection(element.action)">Remove Connection</button>
+            </td>
+        </ng-container>
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    <div class="row">
+        <div class="col-md-3" *ngFor="let e of myConnections">
+            <div class="card">
+                <div class="box">
+                    <div class="img">
+                        <img
+                            src="https://www.pinclipart.com/picdir/middle/355-3553881_stockvader-predicted-adig-user-profile-icon-png-clipart.png">
                     </div>
+                    <h2>{{e.senderName}}<br><span>{{e.senderPosition}}</span></h2>
+                    <p> {{e.senderBio}}</p>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary"
+                        [routerLink]="[ '/user/connections-request',e.userId,e._id]"><i style="vertical-align: bottom;"
+                            class="material-icons">
+                            details
+                        </i> View Profile</button>
+                    <button type="button" class="btn btn-lg btn-block btn-outline-primary"
+                        (click)="removeConnection(e._id)"><i style="vertical-align: bottom;" class="material-icons">
+                            details
+                        </i> Remove Connection</button>
                 </div>
             </div>
         </div>
     </div>
+</div>
