@@ -1,25 +1,20 @@
 <div class="container-fluid" style="margin-top:4rem">
-      <div class="row">
-          <div class="col-md-3" *ngFor="let e of myConnections">
+    <div class="row">
+        <div class="col-md-3" *ngFor="let e of myConnections">
             <div class="card">
                 <div class="box">
                     <div class="img">
-                        <img src="https://www.planwallpaper.com/static/images/cool-wallpaper-5_G6Qe1wU.jpg">
+                        <img
+                            src="https://www.pinclipart.com/picdir/middle/355-3553881_stockvader-predicted-adig-user-profile-icon-png-clipart.png">
                     </div>
-                    <h2>{{e.name}}<br><span>Web Graphic Designer</span></h2>
+                    <h2>{{e.name}}<br><span>{{e.position}}</span></h2>
                     <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et.</p>
-                    <span>
-                        <ul>
-                            <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                        </ul>
-                    </span>
+                        tempor incididunt ut labore et.</p>
+                        <button type="button" class="btn btn-lg btn-block btn-outline-primary" [routerLink]="[ '/user/my-connections',e.connectionId]"><i style="vertical-align: bottom;" class="material-icons">
+                                details
+                                </i> View Profile</button>
                 </div>
             </div>
-          </div>
-      </div>
-  </div>
+        </div>
+    </div>
+</div>
