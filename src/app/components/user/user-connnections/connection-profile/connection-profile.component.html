@@ -1,66 +1,156 @@
-<header class="header">
-        <div class="container">
-          <div class="teacher-name" style="padding-top:20px;">
-    
-            <div class="row" style="margin-top:0px;">
-            <div class="col-md-9">
-              <h2 style="font-size:38px"><strong>AHM Kamal</strong></h2>
+<div class="container emp-profile">
+    <form method="post">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-img">
+                    <img src="https://www.pinclipart.com/picdir/middle/355-3553881_stockvader-predicted-adig-user-profile-icon-png-clipart.png" alt=""/>
+                </div>
             </div>
-            <div class="col-md-3">
-              <div class="button" style="float:right;">
-                <a href="#" class="btn btn-outline-success btn-sm">Edit Profile</a>
-              </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                            <h5>
+                              {{connectionUser.name}}            <i class="material-icons" style="color:green">
+                                  verified_user
+                                  </i>
+                            </h5>
+                            <h6>
+                                {{connectionUser.position}}
+                            </h6>
+                            <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+            <div class="col-md-2">
+                <a href="mailto:{{connectionUser.email}}" class="btn btn-lg btn-block btn-outline-primary">Send Email</a>
             </div>
-          </div>
-    
-          <div class="row" style="margin-top:20px;">
-            <div class="col-md-3"> <!-- Image -->
-              <a href="#"> <img class="rounded-circle" src="images/kamal.jpg" alt="Kamal" style="width:200px;height:200px"></a>
-            </div>
-    
-            <div class="col-md-6"> <!-- Rank & Qualifications -->
-              <h5 style="color:#3AAA64">Associate Professor, <small>Dept. of CSE, Jatiya Kabi Kazi Nazrul Islam University</small></h5>
-              <p>PhD (On study at BUET), M.Sc. in research on ICT(UPC, Spain), M.Sc. in research on ICT(UCL, Belgium).</p>
-              <p>Address: Namapara, Trishal, Mymensingh</p>
-            </div>
-    
-            <div class="col-md-3 text-center"> <!-- Phone & Social -->
-              <span class="number" style="font-size:18px">Phone:<strong>+8801732226402</strong></span>
-              <div class="button" style="padding-top:18px">
-                <a href="mailto:ahmkctg@yahoo.com" class="btn btn-outline-success btn-block">Send Email</a>
-              </div>
-              <div class="social-icons" style="padding-top:18px">
-                <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x" style="color:#3AAA64"></i>
-                  <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
-                </span></a>
-                <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x" style="color:#3AAA64"></i>
-                  <i class="fa fa-google-plus fa-stack-1x fa-inverse"></i>
-                </span></a>
-                <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x" style="color:#3AAA64"></i>
-                  <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                </span></a>
-                <a href="#">
-                <span class="fa-stack fa-lg">
-                  <i class="fa fa-circle fa-stack-2x" style="color:#3AAA64"></i>
-                  <i class="fa fa-slideshare fa-stack-1x fa-inverse"></i>
-                </span></a>
-    
-              </div>
-            </div>
-          </div>
         </div>
-      </header>
-        <!--End of Header-->
-    
-    <!-- Main container -->
-   <div class="container">
-    
-    </div> <!--End of Container-->
-    
+        <div class="row">
+            <div class="col-md-4">
+                <div class="profile-work">
+                    <p>WORK AT</p>
+                    <div>{{connectionEmployer.name}}</div>
+                    <div>{{connectionEmployer.address}}</div>
+                    <a href="{{connectionEmployer.webSite}}">{{connectionEmployer.webSite}}</a><br/>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br/>
+                    <a href="">Web Developer</a><br/>
+                    <a href="">WordPress</a><br/>
+                    <a href="">WooCommerce</a><br/>
+                    <a href="">PHP, .Net</a><br/>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Name</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{connectionUser.name}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Email</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{connectionUser.email}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Phone</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{connectionUser.contactNumber}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Gender</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{connectionUser.gender}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Profession</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{connectionUser.position}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Address</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{connectionUser.address}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>City</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{connectionUser.city}}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Country</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>{{connectionUser.country}}</p>
+                                    </div>
+                                </div>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Experience</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>English Level</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p>Expert</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Availability</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p *ngIf="connectionUser.partTime">Part Time</p>
+                                        <p *ngIf="!connectionUser.partTime">Full Time</p>
+                                      </div>
+                                </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Biography</label><br/>
+                                <p>
+                                  {{connectionUser.bio}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>           
+</div>
