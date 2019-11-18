@@ -31,6 +31,9 @@ import { ChildboxComponent } from './components/company/company-home/commentbox/
 import { CompanyDetailsComponent } from './components/company/company-details/company-details.component';
 import { UserConnnectionsComponent } from './components/user/user-connnections/user-connnections.component';
 import { UserHomeComponent } from './components/user/user-home/user-home.component';
+import { ConnectionProfileComponent } from './components/user/user-connnections/connection-profile/connection-profile.component';
+import { ConnectionRequestComponent } from './components/user/user-connnections/connection-request/connection-request.component';
+import { ConnectionApprovedListComponent } from './components/user/user-connnections/connection-approved-list/connection-approved-list.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { UserHomeComponent } from './components/user/user-home/user-home.compone
     ChildboxComponent,
     CompanyDetailsComponent,
     UserConnnectionsComponent,
-    UserHomeComponent
+    UserHomeComponent,
+    ConnectionProfileComponent,
+    ConnectionRequestComponent,
+    ConnectionApprovedListComponent
   ],
   imports: [
     BrowserModule,

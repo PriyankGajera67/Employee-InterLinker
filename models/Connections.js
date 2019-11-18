@@ -11,9 +11,27 @@ const ConnectionsSchema = new Schema({
     type: String,
     required: true
   },
+  senderName: {
+    type: String,
+    required: true
+  },
+  senderEmployer: {
+    type: String,
+    required: true
+  },
   name: {
     type: String,
     required: true
+  },
+  senderPosition:{
+    type:String,
+    default:"Software Developer",
+    required:true
+  },
+  senderBio:{
+    type:String,
+    default:"This is Bio",
+    required:true
   },
   employer: {
     type: String,
@@ -22,6 +40,16 @@ const ConnectionsSchema = new Schema({
   position:{
     type:String,
     default:"Software Developer",
+    required:true
+  },
+  bio:{
+    type:String,
+    default:"This is Bio",
+    required:true
+  },
+  varified:{
+    type:Boolean,
+    default:false,
     required:true
   }
 });

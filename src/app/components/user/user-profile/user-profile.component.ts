@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
   companies= [];
   ngOnInit() {
     this.inProgress = true;
-    this.isCompany = JSON.parse(localStorage.getItem('currentUser')).role;
+    this.isCompany = JSON.parse(localStorage.getItem('currentUser')).role === 'COMPANY'?true:false;
     this.userService.getCurrentUser().subscribe(res =>{
       this.SET_USER_DATA(res);
     });
@@ -37,6 +37,7 @@ export class UserProfileComponent implements OnInit {
       country:[''],
       city:[''],
       joiningDate:[''],
+      bio:[''],
       gender:[''],
       employer:[''],
       contactNumber:['', Validators.required],
@@ -154,6 +155,9 @@ export class UserProfileComponent implements OnInit {
         }
         if(res.data.gender != undefined){
           this.userDetailForm.get('gender').setValue(res.data.gender);
+        }
+        if(res.data.bio != undefined){
+          this.companyDetailForm.get('bio').setValue(res.data.bio);
         }
         if(res.data.employer != undefined){
           this.userDetailForm.get('employer').setValue(res.data.employer);

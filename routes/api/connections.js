@@ -18,7 +18,12 @@ router.post("/addConnection", (req, res) => {
         connectionId: req.body.connectionId,
         name: req.body.name,
         employer: req.body.employer,
-        position:req.body.position
+        position:req.body.position,
+        bio:req.body.bio,
+        senderName: req.body.senderName,
+        senderEmployer: req.body.senderEmployer,
+        senderPosition:req.body.senderPosition,
+        senderBio:req.body.senderBio
       });
       newConnection.save().then(user => {
         return res.json(user)
@@ -31,10 +36,43 @@ router.post("/addConnection", (req, res) => {
 router.post("/getMyConnnections", (req, res) => {
   data = req.body;
   console.log(data.userId);
-  Connections.find({ userId: data.userId }, (err, data) => {
+  Connections.find({ userId: data.userId,varified:true }, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
 });
+
+router.post("/getConnnectionRequests", (req, res) => {
+  data = req.body;
+  Connections.find({ connectionId: data.connectionId,varified:false }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
+router.post("/getConnnectionRequestsApproved", (req, res) => {
+  data = req.body;
+  Connections.find({ connectionId: data.connectionId,varified:true }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
+router.post("/acceptRequest", (req, res) => {
+  data = req.body;
+  Connections.update({_id: data.Id},{varified:true }, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
+router.post("/removeConnection", (req, res) => {
+  data = req.body;
+  Connections.remove({_id: data.Id}, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
 
 module.exports = router;

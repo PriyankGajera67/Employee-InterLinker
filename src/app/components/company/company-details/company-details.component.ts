@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatTableDataSource} from '@angular/material/table';
 
-import { CompanyService, ConnectionsService } from 'src/app/_services';
+import { CompanyService, ConnectionsService, UserService } from 'src/app/_services';
 
 
 export interface ConnectionElement {
@@ -11,10 +11,11 @@ export interface ConnectionElement {
   name: string;
   position: string;
   action: string;
+  bio:string;
 }
 
 const ELEMENT_DATA: ConnectionElement[] = [
-  {avatar: "f", name: 'Hydrogen', position: "fasdfa", action: 'H'}
+  {avatar: "f", name: 'Hydrogen', position: "fasdfa", action: 'H',bio:''}
 ];
 
 @Component({
@@ -24,11 +25,11 @@ const ELEMENT_DATA: ConnectionElement[] = [
 })
 export class CompanyDetailsComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute,private companyService: CompanyService,private connectionsService:ConnectionsService) { }
+  constructor(private route: ActivatedRoute,private companyService: CompanyService,private connectionsService:ConnectionsService,private userService:UserService) { }
   companyId:any;
   currentCompany: any;
   currentUserId:any;
-  
+  currentUser:any;
   employeeList:ConnectionElement[] = [];
 
   displayedColumns: string[] = ["avatar", "name", "position","action"];
@@ -41,6 +42,9 @@ export class CompanyDetailsComponent implements OnInit {
       this.companyId = param.id;
     });
     this.currentUserId = JSON.parse(localStorage.getItem('currentUser')).id;
+    this.userService.getUser(this.currentUserId).subscribe(res =>{
+      this.currentUser = res.data;
+    });
     this.companyService.getCompanyById(this.companyId).subscribe(res =>{
       this.currentCompany = res.data;
     })
@@ -62,6 +66,7 @@ export class CompanyDetailsComponent implements OnInit {
         name: element.name,
         position: element.position,
         action: element._id,
+        bio:element.bio,
       });
     });
     this.dataSource = new MatTableDataSource (this.employeeList);
@@ -77,7 +82,7 @@ export class CompanyDetailsComponent implements OnInit {
         requestConnection = e;
       }
     })
-    this.connectionsService.makeConnection(this.currentUserId,requestConnection.action,requestConnection.name,this.companyId,requestConnection.position).subscribe(res =>{
+    this.connectionsService.makeConnection(this.currentUserId,requestConnection.action,requestConnection.name,this.companyId,requestConnection.position,requestConnection.bio,this.currentUser.name,this.currentUser.employer,this.currentUser.position,this.currentUser.bio).subscribe(res =>{
       console.log(
         "res",res
       );
