@@ -5,7 +5,7 @@
         </div>
     </div>
 
-    <div class="card" style="width: 100%;"> 
+    <div class="card" style="width: 100%;"  *ngIf="myConnections?.length != 0"> 
             <div class="card-body">
                     <mat-form-field>
                             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search Employees">

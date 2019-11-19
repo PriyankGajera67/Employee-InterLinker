@@ -41,6 +41,7 @@ export class ConnectionApprovedListComponent implements OnInit {
 
   setConnections(res){
     this.employeeList = [];
+    this.myConnections = res.data;
     res.data.forEach(element => {
       this.employeeList.push({
         avatar: element.avatar,
@@ -58,7 +59,9 @@ export class ConnectionApprovedListComponent implements OnInit {
 
   removeConnection(id){
     this.connectionsService.removeConnection(id).subscribe(res =>{
-      console.log(res);
+      this.connectionsService.getMyConnectionRequestsApproved(this.currentUserId).subscribe(res =>{
+        this.setConnections(res);
+      })
     })
   }
 
