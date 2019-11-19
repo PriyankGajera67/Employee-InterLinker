@@ -44,8 +44,8 @@ export class ConnectionApprovedListComponent implements OnInit {
     res.data.forEach(element => {
       this.employeeList.push({
         avatar: element.avatar,
-        name: element.name,
-        position: element.position,
+        name: element.senderName,
+        position: element.senderPosition,
         view:element.userId,
         action: element._id,
         bio:element.bio,
