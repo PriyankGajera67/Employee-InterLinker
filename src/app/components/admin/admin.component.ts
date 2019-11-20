@@ -90,6 +90,7 @@ export class AdminComponent implements OnInit {
     this.totalUSers = this.dataVarUsers.length;
     this.dataSource = this.dataVarCompanies;
     this.dataSourceUsers = this.dataVarUsers;
+    
   }
 
   onUserView(){

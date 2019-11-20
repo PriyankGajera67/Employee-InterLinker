@@ -29,7 +29,9 @@ export class ConnectionRequestComponent implements OnInit {
 
   acceptRequest(id){
     this.connectionsService.acceptRequest(id).subscribe(res =>{
-      console.log("fasfadfa",res);
+      this.connectionsService.getMyConnectionRequests(this.currentUserId).subscribe(res =>{
+        this.setConnections(res);
+      })
     })
   }
 }
