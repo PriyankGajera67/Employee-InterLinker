@@ -21,6 +21,9 @@ export class CompanyService {
         return this.http.post<any>(`${environment.apiUrl}/users/getVerificationRequests`,{employer});
     }
 
+    getEmployees(employer:string){
+        return this.http.post<any>(`${environment.apiUrl}/users/getEmployees`,{employer});
+    }
     
     getVerifiedUsers(employer:string){
         return this.http.post<any>(`${environment.apiUrl}/users/getVerifiedUsers`,{employer});

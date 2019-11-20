@@ -34,6 +34,7 @@ import { UserHomeComponent } from './components/user/user-home/user-home.compone
 import { ConnectionProfileComponent } from './components/user/user-connnections/connection-profile/connection-profile.component';
 import { ConnectionRequestComponent } from './components/user/user-connnections/connection-request/connection-request.component';
 import { ConnectionApprovedListComponent } from './components/user/user-connnections/connection-approved-list/connection-approved-list.component';
+import { CompanyEmployeeListComponent } from './components/company/company-employee-list/company-employee-list.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { ConnectionApprovedListComponent } from './components/user/user-connnect
     UserHomeComponent,
     ConnectionProfileComponent,
     ConnectionRequestComponent,
-    ConnectionApprovedListComponent
+    ConnectionApprovedListComponent,
+    CompanyEmployeeListComponent
   ],
   imports: [
     BrowserModule,

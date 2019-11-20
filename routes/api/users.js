@@ -174,6 +174,14 @@ router.post("/getVerificationRequests", (req, res) => {
   });
 });
 
+router.post("/getEmployees", (req, res) => {
+  data = req.body;
+  User.find({ employer: data.employer}, (err, data) => {
+    if (err) return res.json({ success: false, error: err });
+    return res.json({ success: true, data: data });
+  });
+});
+
 router.post("/getCompanyById", (req, res) => {
   data = req.body;
   User.findById(req.body.id, (err, user) => {
