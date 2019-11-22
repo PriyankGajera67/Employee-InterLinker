@@ -71,7 +71,7 @@ require("./config/passport")(passport);
 // Routes
 app.use("/api/users", users);
 app.use("/api/connections", connections);
-app.user("/api/usershifts", usershifts);
+app.use("/api/usershifts", usershifts);
 
 const port = process.env.PORT || 5000;
 
