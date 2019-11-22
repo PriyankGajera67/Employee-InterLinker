@@ -82,24 +82,24 @@ export class UserShiftSchedulesComponent {
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'A 3 day event',
+      title: '9:00 AM to 5:00 PM',
       color: colors.red,
     },
     {
       start: startOfDay(new Date()),
-      title: 'An event with no end date',
+      title: '9:00 AM to 5:00 PM',
       color: colors.yellow,
     },
     {
       start: subDays(endOfMonth(new Date()), 3),
       end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
+      title: '9:00 AM to 5:00 PM',
       color: colors.blue,
     },
     {
       start: addHours(startOfDay(new Date()), 2),
       end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
+      title: '9:00 AM to 5:00 PM',
       color: colors.yellow,
     }
   ];
