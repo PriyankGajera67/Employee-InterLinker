@@ -39,6 +39,7 @@ import { ConnectionRequestComponent } from './components/user/user-connnections/
 import { ConnectionApprovedListComponent } from './components/user/user-connnections/connection-approved-list/connection-approved-list.component';
 import { CompanyEmployeeListComponent } from './components/company/company-employee-list/company-employee-list.component';
 import { CompanySchedulerComponent } from './components/company/company-scheduler/company-scheduler.component';
+import { UserShiftSchedulesComponent } from './components/user/user-shift-schedules/user-shift-schedules.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { CompanySchedulerComponent } from './components/company/company-schedule
     ConnectionRequestComponent,
     ConnectionApprovedListComponent,
     CompanyEmployeeListComponent,
-    CompanySchedulerComponent
+    CompanySchedulerComponent,
+    UserShiftSchedulesComponent
   ],
   imports: [
     BrowserModule,
