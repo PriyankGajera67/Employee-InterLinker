@@ -1,6 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~ag-grid-community/dist/styles/ag-grid.css";
-@import "~ag-grid-community/dist/styles/ag-theme-balham.css";
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+@import '../node_modules/flatpickr/dist/flatpickr.css';
 
 * {
   box-sizing: border-box;

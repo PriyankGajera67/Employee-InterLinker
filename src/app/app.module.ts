@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularMaterialModule } from './angular-material.module';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -17,6 +16,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { DataTableModule } from 'ng-angular8-datatable';
 
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { FlatpickrModule } from 'angularx-flatpickr';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { LogInComponent } from './components/log-in/log-in.component';
@@ -35,6 +38,8 @@ import { ConnectionProfileComponent } from './components/user/user-connnections/
 import { ConnectionRequestComponent } from './components/user/user-connnections/connection-request/connection-request.component';
 import { ConnectionApprovedListComponent } from './components/user/user-connnections/connection-approved-list/connection-approved-list.component';
 import { CompanyEmployeeListComponent } from './components/company/company-employee-list/company-employee-list.component';
+import { CompanySchedulerComponent } from './components/company/company-scheduler/company-scheduler.component';
+import { UserShiftSchedulesComponent } from './components/user/user-shift-schedules/user-shift-schedules.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +59,9 @@ import { CompanyEmployeeListComponent } from './components/company/company-emplo
     ConnectionProfileComponent,
     ConnectionRequestComponent,
     ConnectionApprovedListComponent,
-    CompanyEmployeeListComponent
+    CompanyEmployeeListComponent,
+    CompanySchedulerComponent,
+    UserShiftSchedulesComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +73,13 @@ import { CompanyEmployeeListComponent } from './components/company/company-emplo
     FormsModule,
     ReactiveFormsModule,
     DataTableModule,
-    AgGridModule.withComponents([])
+    NgbModalModule,
+    AgGridModule.withComponents([]),
+    FlatpickrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
