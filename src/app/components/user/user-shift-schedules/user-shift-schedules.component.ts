@@ -2,7 +2,9 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 import {
   startOfDay,
@@ -22,6 +24,7 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { UsershiftsService } from 'src/app/_services';
 
 const colors: any = {
   red: {
@@ -44,7 +47,7 @@ const colors: any = {
   templateUrl: './user-shift-schedules.component.html',
   styleUrls: ['./user-shift-schedules.component.scss']
 })
-export class UserShiftSchedulesComponent {
+export class UserShiftSchedulesComponent implements OnInit{
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
 
   view: CalendarView = CalendarView.Month;
@@ -78,35 +81,18 @@ export class UserShiftSchedulesComponent {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: '9:00 AM to 5:00 PM',
-      color: colors.red,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: '9:00 AM to 5:00 PM',
-      color: colors.yellow,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: '9:00 AM to 5:00 PM',
-      color: colors.blue,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: '9:00 AM to 5:00 PM',
-      color: colors.yellow,
-    }
-  ];
+  events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
-
-  constructor(private modal: NgbModal) {}
+  currentUserId:any;
+  isLoading:boolean= false;
+  constructor(private ref: ChangeDetectorRef,private modal: NgbModal,private userShiftServices:UsershiftsService) {}
+  ngOnInit(){
+    this.currentUserId = JSON.parse(localStorage.getItem('currentUser')).id;
+    this.userShiftServices.getUserShift(this.currentUserId).subscribe(res =>{
+      this.setEvents(res);
+    })
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -145,21 +131,29 @@ export class UserShiftSchedulesComponent {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        }
-      }
-    ];
+  setEvents(res:any){
+    this.events = [];
+    let cont= [];
+    if(res.data.length >0 ){
+      this.events = [
+        JSON.parse(res.data[0].data).forEach(element => {
+          cont.push({
+            title: element.title,
+            start: startOfDay(new Date(element.start)),
+            end: endOfDay(new Date(element.end)),
+            color: colors.red,
+            draggable: true,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            }
+          })
+        })];
+    }
+      this.events=cont;
+      this.isLoading = false;
+      this.ref.detectChanges();
+      
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
