@@ -1,3 +1,6 @@
+<div class="loader-div" *ngIf="isLoading">
+        <div class="loader"></div>
+    </div>
 <div class="container-fluid" style="margin-top:20px;">
     <div class="row">
         <div class="col-md-6">
@@ -91,11 +94,20 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body">
+                    <div class="alert alert-info">
+                        Make Sure you save shift after adding new shift or deleting existing one.
+                    </div>
                     <h3>
                         Shifts
-                        <button class="btn btn-primary pull-right" (click)="addEvent()">
-                            Add new
+                        <button class="btn btn-primary pull-right" style="float:right;" (click)="save()">
+                                Save Shift
+                            </button>
+
+                        <button class="btn btn-primary pull-right" style="float:right; margin-right:2px;" (click)="addEvent()">
+                            Add Shift
                         </button>
+                        &nbsp;
+                       
                         <div class="clearfix"></div>
                     </h3>
 

@@ -9,14 +9,16 @@ const passport = require("passport");
 const Usershifts = require("../../models/Usershift");
 
 router.post("/addShift", (req, res) => {
-  Usershifts.findOne({ userId:req.body.userId,start: req.body.start, end:req.body.end }).then(shift => {
+  Usershifts.findOne({ userId:req.body.userId}).then(shift => {
     if (shift) {
-      return res.status(400).json({ email: "Shift already exists" });
+      Usershifts.update({userId:req.body.userId},{data:req.body.data},(err, data) => {
+        if (err) return res.json({ success: false, error: err });
+        return res.json({ success: true, data: data });
+      });
     } else {
       const newShift = new Usershifts({
         userId: req.body.userId,
-        start: req.body.start,
-        end:  req.body.end
+        data: req.body.data
       });
       newShift.save().then(shift => {
         return shift.json()
@@ -36,7 +38,7 @@ router.post("/getShift", (req, res) => {
 
 router.post("/removeShift", (req, res) => {
   data = req.body;
-  Usershifts.remove({userId:data.userId,start: data.start, end:data.end}, (err, data) => {
+  Usershifts.remove({userId:data.userId}, (err, data) => {
     if (err) return res.json({ success: false, error: err });
     return res.json({ success: true, data: data });
   });
