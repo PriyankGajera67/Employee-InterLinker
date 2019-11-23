@@ -2,7 +2,8 @@ import {
   Component,
   ChangeDetectionStrategy,
   ViewChild,
-  TemplateRef
+  TemplateRef,
+  OnInit
 } from '@angular/core';
 import {
   startOfDay,
@@ -22,6 +23,8 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { UsershiftsService } from 'src/app/_services';
+import { ActivatedRoute, Router } from '@angular/router';
 
 const colors: any = {
   red: {
@@ -44,10 +47,9 @@ const colors: any = {
   templateUrl: './company-scheduler.component.html',
   styleUrls: ['./company-scheduler.component.scss']
 })
-export class CompanySchedulerComponent {
+export class CompanySchedulerComponent implements OnInit{
 
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>;
-
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
@@ -79,35 +81,20 @@ export class CompanySchedulerComponent {
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-    }
-  ];
+  events: CalendarEvent[] = [];
 
   activeDayIsOpen: boolean = true;
+  currentUserId:any;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private router: Router,private route: ActivatedRoute,private modal: NgbModal,private userShiftServices:UsershiftsService) {}
+  ngOnInit(){
+    this.route.params.subscribe(param =>{
+      this.currentUserId = param.id;
+    });
+    this.userShiftServices.getUserShift(this.currentUserId).subscribe(res =>{
+      this.setEvents(res);
+    })
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -161,6 +148,22 @@ export class CompanySchedulerComponent {
         }
       }
     ];
+  }
+
+
+  save(){
+    console.log(this.events);
+    this.userShiftServices.addShift(this.currentUserId,JSON.stringify(this.events)).subscribe(res =>{
+      this.userShiftServices.getUserShift(this.currentUserId).subscribe(res =>{
+        this.setEvents(res);
+      })
+    })
+  }
+
+  setEvents(res:any){
+    this.events = [];
+    console.log(JSON.parse(res.data[0].data))
+    this.events = [...this.events,JSON.parse(res.data[0].data)];
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {

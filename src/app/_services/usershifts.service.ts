@@ -8,9 +8,9 @@ import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class UsershiftsService {
     constructor(private http: HttpClient) { }
-    addShift(userId: string,start: string, end: string) {
+    addShift(userId: string,data: string) {
         console.log("inside");
-        return this.http.post<any>(`${environment.apiUrl}/usershifts/addShift`, { userId,start,end});
+        return this.http.post<any>(`${environment.apiUrl}/usershifts/addShift`, { userId,data});
     }
 
 

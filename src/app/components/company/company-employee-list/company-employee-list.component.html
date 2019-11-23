@@ -47,6 +47,8 @@
                                     <th mat-header-cell *matHeaderCellDef> Action</th>
                                     <td mat-cell *matCellDef="let element">
                                         <button class="btn btn-danger"  (click)="removeConnection(element.action)">Deactive</button>
+                                        &nbsp;
+                                        <button class="btn btn-warning" [routerLink]="[ '/company/scheduler',element.view]">Manage</button>
                                     </td>
                                 </ng-container>
                         

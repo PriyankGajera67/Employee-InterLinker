@@ -7,13 +7,9 @@ const UserShiftSchema = new Schema({
     type: String,
     required: true
   },
-  start:{
+  data:{
     type: String,
     required:true,
-  },
-  end:{
-    type: String,
-    required:true
   }
 });
 

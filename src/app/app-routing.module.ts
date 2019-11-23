@@ -31,7 +31,7 @@ const routes: Routes = [
   { path: 'user-home', component: UserHomeComponent, canActivate: [AuthGuard]},
   { path: 'user/my-connections', component: UserConnnectionsComponent, canActivate: [AuthGuard]},
   { path: 'user/my-shift-schedules', component: UserShiftSchedulesComponent, canActivate: [AuthGuard]},
-  { path: 'company/scheduler', component: CompanySchedulerComponent, canActivate: [AuthGuard]},
+  { path: 'company/scheduler/:id', component: CompanySchedulerComponent, canActivate: [AuthGuard]},
   { path: 'company/employee-list', component: CompanyEmployeeListComponent, canActivate: [AuthGuard]},
   { path: 'user/connection-requests', component: ConnectionRequestComponent, canActivate: [AuthGuard]},
   { path: 'user/connection-requests-approved', component: ConnectionApprovedListComponent, canActivate: [AuthGuard]},
