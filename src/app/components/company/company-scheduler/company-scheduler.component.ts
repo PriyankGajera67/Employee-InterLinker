@@ -3,7 +3,8 @@ import {
   ChangeDetectionStrategy,
   ViewChild,
   TemplateRef,
-  OnInit
+  OnInit,
+  ChangeDetectorRef
 } from '@angular/core';
 import {
   startOfDay,
@@ -53,7 +54,7 @@ export class CompanySchedulerComponent implements OnInit{
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
-
+  isLoading:boolean = false;
   viewDate: Date = new Date();
 
   modalData: {
@@ -81,13 +82,14 @@ export class CompanySchedulerComponent implements OnInit{
 
   refresh: Subject<any> = new Subject();
 
-  events: CalendarEvent[] = [];
+  events: CalendarEvent[] = []
 
   activeDayIsOpen: boolean = true;
   currentUserId:any;
 
-  constructor(private router: Router,private route: ActivatedRoute,private modal: NgbModal,private userShiftServices:UsershiftsService) {}
+  constructor(private ref: ChangeDetectorRef,private router: Router,private route: ActivatedRoute,private modal: NgbModal,private userShiftServices:UsershiftsService) {}
   ngOnInit(){
+    this.isLoading = true;
     this.route.params.subscribe(param =>{
       this.currentUserId = param.id;
     });
@@ -137,10 +139,10 @@ export class CompanySchedulerComponent implements OnInit{
     this.events = [
       ...this.events,
       {
-        title: 'New event',
+        title: '9:00 AM - 5:00 PM',
         start: startOfDay(new Date()),
         end: endOfDay(new Date()),
-        color: colors.red,
+        color: colors.blue,
         draggable: true,
         resizable: {
           beforeStart: true,
@@ -152,7 +154,7 @@ export class CompanySchedulerComponent implements OnInit{
 
 
   save(){
-    console.log(this.events);
+    this.isLoading = true;
     this.userShiftServices.addShift(this.currentUserId,JSON.stringify(this.events)).subscribe(res =>{
       this.userShiftServices.getUserShift(this.currentUserId).subscribe(res =>{
         this.setEvents(res);
@@ -162,8 +164,27 @@ export class CompanySchedulerComponent implements OnInit{
 
   setEvents(res:any){
     this.events = [];
-    console.log(JSON.parse(res.data[0].data))
-    this.events = [...this.events,JSON.parse(res.data[0].data)];
+    let cont= [];
+    if(res.data.length >0 ){
+      this.events = [
+        JSON.parse(res.data[0].data).forEach(element => {
+          cont.push({
+            title: element.title,
+            start: startOfDay(new Date(element.start)),
+            end: endOfDay(new Date(element.end)),
+            color: colors.red,
+            draggable: true,
+            resizable: {
+              beforeStart: true,
+              afterEnd: true
+            }
+          })
+        })];
+    }
+      this.events=cont;
+      this.isLoading = false;
+      this.ref.detectChanges();
+      
   }
 
   deleteEvent(eventToDelete: CalendarEvent) {
