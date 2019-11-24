@@ -14,7 +14,14 @@
   .card-signin .card-img-left {
     width: 45%;
     /* Link to your background image using in the property below! */
-    background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+    background: scroll center url('https://miro.medium.com/max/1551/1*ukM74jDxbMpyzcEi7CiCLg.png');
+    background-size: cover;
+  }
+
+  .card-signin .card-img-left.company {
+    width: 45%;
+    /* Link to your background image using in the property below! */
+    background: scroll center url('http://printingpressservices.com/wp-content/uploads/2019/03/company.jpg');
     background-size: cover;
   }
   
