@@ -34,4 +34,12 @@ export class ConnectionRequestComponent implements OnInit {
       })
     })
   }
+
+  removeRequest(id){
+    this.connectionsService.removeConnection(id).subscribe(res =>{
+      this.connectionsService.getMyConnectionRequests(this.currentUserId).subscribe(res =>{
+        this.setConnections(res);
+      })
+    })
+  }
 }
