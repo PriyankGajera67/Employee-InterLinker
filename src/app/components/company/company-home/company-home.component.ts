@@ -60,7 +60,7 @@ export class CompanyHomeComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
   setVerificationRequest(res) {
-    let verificationRequestList = []
+    this.verificationRequests = [];
     res.data.forEach(element => {
       this.verificationRequests.push({
         avatar: element.avatar,
